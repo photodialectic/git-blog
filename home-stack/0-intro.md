@@ -10,7 +10,7 @@ Before embracing SOA, I used to host each site or service on a subdomain of my m
 
 In this series, I will write about how I have implemented various infrastructure components in my homestack.
 
-## Table of Contents
+## Posts
 
 [1. Site-Router](/blog/home-stack/1-site-router.md)
 
