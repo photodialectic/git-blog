@@ -185,32 +185,32 @@ class HealthHandler(BaseHandler):
             return response.code
         except Exception:
             return 599
-    
+
     async def get(self):
         health_config = yaml.safe_load(open("/app/health.yml"))
         sites = health_config["sites"]
-        
+
         # Build URLs for all services
-        host = self.request.headers["x-forwarded-host"] 
+        host = self.request.headers["x-forwarded-host"]
         proto = self.request.headers["x-forwarded-proto"]
         urls = [f"{proto}://{host}{site['path']}" for site in sites]
-        
+
         # Make async requests to all services
         reqs = [self.health_check(url) for url in urls]
         responses = await multi(reqs)
-        
+
         # Aggregate results
         for site, status_code in zip(sites, responses):
             site["status"] = status_code
-            
+
         # Return worst status as overall status
         self.set_status(max(site["status"] for site in sites))
-        
+
         # JSON response if requested
         if self.request.headers.get("content-type", "").startswith("application/json"):
             self.write({"sites": sites})
             return
-            
+
         # HTML dashboard otherwise
         self.render("html/layout.html", page="health", sites=sites)
 ```
@@ -244,7 +244,7 @@ The docs service is a NextJS application that serves OpenAPI specifications for 
 docs/
 ├── specs/           # OpenAPI YAML specifications
 │   ├── ai-api.yml
-│   ├── blog-api.yml  
+│   ├── blog-api.yml
 │   ├── chat-gpt.yml
 │   ├── chores-api.yml
 │   └── ...
@@ -280,19 +280,16 @@ security:
 The docs service provides two different documentation viewers:
 
 **Swagger UI Interface** (`/docs/oas/ai-api.yml`):
+
 ```javascript
 // src/pages/oas/[...slug].js
 export default function SwaggerPage() {
-  return (
-    <SwaggerUI 
-      deepLinking={true} 
-      url={`/docs/api/specs/${spec}`} 
-    />
-  );
+  return <SwaggerUI deepLinking={true} url={`/docs/api/specs/${spec}`} />;
 }
 ```
 
 **Redocly Interface** (`/docs/redoc/ai-api.yml`):
+
 - Alternative documentation viewer with different UI/UX
 - Better for documentation-heavy APIs
 - Enhanced navigation and search capabilities
@@ -306,11 +303,11 @@ Specification files are served dynamically through an API endpoint:
 export default function handler(req, res) {
   const { file } = req.query;
   const filePath = `/app/specs/${file}`;
-  
+
   if (!fs.existsSync(filePath)) {
     return res.status(404).json({ message: "Not Found" });
   }
-  
+
   fs.createReadStream(filePath).pipe(res);
 }
 ```

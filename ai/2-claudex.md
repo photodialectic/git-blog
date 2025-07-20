@@ -5,8 +5,9 @@ AI agents like Claude Code and Codex are powerful development tools, but they co
 ## The Security Problem
 
 AI agents need broad system access to be useful, but this creates risks:
+
 - **File system access** - agents can read sensitive files or modify critical code
-- **Network access** - agents might leak data or download malicious content  
+- **Network access** - agents might leak data or download malicious content
 - **Command execution** - agents can run potentially dangerous system commands
 - **Workspace persistence** - no tracking of what changes agents make
 
@@ -30,6 +31,7 @@ Claudex addresses these concerns through containerization with strict isolation:
 ```
 
 **Key Features:**
+
 - **Network isolation** via iptables firewall
 - **File system sandboxing** through selective mounting
 - **Git-based change tracking** for all modifications
@@ -77,6 +79,7 @@ ENTRYPOINT ["/init-firewall.sh"]
 ## Usage Examples
 
 ### Basic Project Development
+
 ```bash
 # Mount current project and start AI session
 claudex
@@ -85,13 +88,15 @@ claudex
 claudex service1/ service2/ service3/
 ```
 
-### With Instructions Context  
+### With Instructions Context
+
 ```bash
 # Include project documentation for AI context
 claudex --include ./docs
 ```
 
 ### Network Access for OAuth
+
 ```bash
 # Allow network access for authentication flows
 claudex --host-network
@@ -102,10 +107,11 @@ claudex --host-network
 Inside the Claudex container, you get a fully configured development environment:
 
 ### File System Layout
+
 ```
 /workspace/
 ├── service1/          # Your mounted projects
-├── service2/          
+├── service2/
 ├── .git/              # Auto-initialized Git repo
 └── instructions/      # Optional context files
 
@@ -113,13 +119,17 @@ Inside the Claudex container, you get a fully configured development environment
 ```
 
 ### Network Security
+
 The firewall blocks most outbound connections but allows:
+
 - Essential package management (apt, npm, pip)
 - Git operations to known repositories
 - AI API endpoints (claude.ai, openai.com)
 
 ### Git Integration
+
 Every Claudex session automatically:
+
 - Initializes a Git repository in `/workspace`
 - Commits initial state of all mounted files
 - Tracks all changes made by AI agents
@@ -130,6 +140,7 @@ Every Claudex session automatically:
 Claudex integrates seamlessly with my AI-API through configuration:
 
 ### Claude Code Configuration
+
 ```json
 // ~/.claude.json
 {
@@ -139,7 +150,8 @@ Claudex integrates seamlessly with my AI-API through configuration:
 }
 ```
 
-### Codex Configuration  
+### Codex Configuration
+
 ```toml
 # ~/.codex/config.toml
 [model_providers.nhdc_ai_api]
@@ -157,6 +169,7 @@ This routes all AI requests through my centralized AI-API instead of directly to
 ## Advanced Features
 
 ### MCP Server Integration
+
 Claudex supports Model Context Protocol (MCP) servers running in Docker:
 
 ```json
@@ -172,13 +185,14 @@ Claudex supports Model Context Protocol (MCP) servers running in Docker:
 ```
 
 ### Agentception: Codex as MCP Server
+
 You can even run Codex as an MCP server within Claude:
 
 ```json
 {
   "mcpServers": {
     "codex": {
-      "command": "codex", 
+      "command": "codex",
       "args": ["mcp"]
     }
   }
@@ -192,7 +206,7 @@ This creates a fascinating AI inception where Claude can call Codex as a tool!
 Claudex provides multiple layers of security:
 
 1. **Process isolation** - AI agents can't escape the container
-2. **Network restrictions** - firewall prevents data exfiltration  
+2. **Network restrictions** - firewall prevents data exfiltration
 3. **File system limits** - only mounted directories are accessible
 4. **Audit trail** - Git tracks every change made
 5. **Ephemeral sessions** - containers are destroyed after use
@@ -207,7 +221,7 @@ claudex ./my-project
 
 # Inside container - AI agents have access to:
 # - Project files (read/write)
-# - Development tools (git, npm, etc)  
+# - Development tools (git, npm, etc)
 # - AI APIs (through controlled network access)
 # - But NOT sensitive host system files
 
@@ -224,7 +238,7 @@ exit
 Claudex transforms AI-assisted development from a security risk into a secure, auditable process. It gives you the power of AI agents while maintaining:
 
 - **Control** over what systems agents can access
-- **Visibility** into what changes agents make  
+- **Visibility** into what changes agents make
 - **Security** through multiple isolation layers
 - **Flexibility** to work with any AI provider or model
 

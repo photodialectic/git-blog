@@ -7,7 +7,7 @@ Managing multiple AI provider APIs (OpenAI, Anthropic, Google) across different 
 [LiteLLM](https://docs.litellm.ai/) translates requests between different AI provider APIs, presenting a unified OpenAI-compatible interface. This means:
 
 - **Single integration point** - all services use the same API format
-- **Provider abstraction** - switch between models without changing application code  
+- **Provider abstraction** - switch between models without changing application code
 - **Centralized authentication** - one master key instead of multiple provider keys
 - **Built-in features** - logging, rate limiting, cost tracking, and fallbacks
 
@@ -22,23 +22,23 @@ model_list:
     litellm_params:
       model: openai/gpt-4o-mini
       api_key: os.environ/OPENAI_API_KEY
-  
+
   - model_name: gpt-3.5
     litellm_params:
       model: openai/gpt-3.5-turbo
       api_key: os.environ/OPENAI_API_KEY
 
-  # Anthropic Models  
+  # Anthropic Models
   - model_name: claude-4
     litellm_params:
       model: anthropic/claude-sonnet-4-20250514
       api_key: os.environ/ANTHROPIC_API_KEY
-      
+
   - model_name: claude-3-5-sonnet
     litellm_params:
       model: anthropic/claude-3-5-sonnet-20241022
       api_key: os.environ/ANTHROPIC_API_KEY
-      
+
   - model_name: claude-3-5-haiku
     litellm_params:
       model: anthropic/claude-3-5-haiku-20241022
@@ -92,6 +92,7 @@ ai-api:
 ```
 
 Key configuration details:
+
 - **Path-based routing** - accessible at `www.nickhedberg.com/ai-api`
 - **Environment variables** - provider API keys loaded from encrypted secrets
 - **Volume mount** - configuration file mounted into container
@@ -102,35 +103,41 @@ Key configuration details:
 Services can now use any AI model through a single endpoint:
 
 ### Chat Completion
+
 ```javascript
-const response = await fetch('https://www.nickhedberg.com/ai-api/chat/completions', {
-  method: 'POST',
-  headers: {
-    'Authorization': `Bearer ${AI_API_MK}`,
-    'Content-Type': 'application/json'
+const response = await fetch(
+  "https://www.nickhedberg.com/ai-api/chat/completions",
+  {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${AI_API_MK}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: "claude-4",
+      messages: [{ role: "user", content: "Explain containerization" }],
+    }),
   },
-  body: JSON.stringify({
-    model: 'claude-4',
-    messages: [
-      { role: 'user', content: 'Explain containerization' }
-    ]
-  })
-});
+);
 ```
 
 ### Model Switching
+
 ```javascript
 // Switch providers without changing code
-const models = ['gpt-4o-mini', 'claude-3-5-sonnet', 'gemini-2.0-flash'];
+const models = ["gpt-4o-mini", "claude-3-5-sonnet", "gemini-2.0-flash"];
 const model = models[Math.floor(Math.random() * models.length)];
 
-const response = await fetch('https://www.nickhedberg.com/ai-api/chat/completions', {
-  // ... same headers and structure
-  body: JSON.stringify({
-    model: model, // Dynamic model selection
-    messages: messages
-  })
-});
+const response = await fetch(
+  "https://www.nickhedberg.com/ai-api/chat/completions",
+  {
+    // ... same headers and structure
+    body: JSON.stringify({
+      model: model, // Dynamic model selection
+      messages: messages,
+    }),
+  },
+);
 ```
 
 ## Benefits in Practice
@@ -138,7 +145,7 @@ const response = await fetch('https://www.nickhedberg.com/ai-api/chat/completion
 This setup has transformed how I integrate AI across HomeStack services:
 
 1. **Simplified integration** - every service uses the same API contract
-2. **Centralized cost tracking** - all AI spend flows through one endpoint  
+2. **Centralized cost tracking** - all AI spend flows through one endpoint
 3. **Easy model experimentation** - switch models by changing a string
 4. **Provider redundancy** - if one provider is down, switch to another
 5. **Security** - provider API keys stored in one secure location

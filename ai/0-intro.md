@@ -12,6 +12,7 @@ My AI setup consists of two main components:
 2. **Claudex**: A secure, containerized development environment for AI agents
 
 This architecture provides several key benefits:
+
 - **Single API endpoint** for all AI providers (OpenAI, Anthropic, Google)
 - **Unified authentication** using master keys instead of individual provider keys
 - **Cost tracking and rate limiting** across all AI usage

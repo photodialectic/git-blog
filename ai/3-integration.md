@@ -16,6 +16,7 @@ All AI-enabled services in my HomeStack follow the same integration pattern:
 My chat-gpt service demonstrates the most complete AI integration, providing a full conversational interface with model selection and function calling.
 
 ### API Configuration
+
 ```javascript
 // chat-gpt/pages/api/chat/completions.js
 import OpenAI from "openai";
@@ -27,7 +28,8 @@ const openai = new OpenAI({
 ```
 
 ### Model Listing
-```javascript  
+
+```javascript
 // chat-gpt/pages/api/models.js
 export default withApiAuthRequired(async function handler(req, res) {
   const openai = new OpenAI({
@@ -43,6 +45,7 @@ export default withApiAuthRequired(async function handler(req, res) {
 This seamlessly exposes all available models (GPT, Claude, Gemini) through a single endpoint, letting users switch between providers without the service caring about implementation details.
 
 ### Function Calling
+
 The chat service also demonstrates AI function calling:
 
 ```javascript
@@ -50,7 +53,7 @@ const functionMap = {
   get_current_weather: {
     func: getCurrentWeather,
     config: {
-      name: "get_current_weather", 
+      name: "get_current_weather",
       description: "Get the current weather in a given location",
       parameters: {
         type: "object",
@@ -75,6 +78,7 @@ This allows AI models to call JavaScript functions, extending their capabilities
 My code-editor service takes a different approach, using Anthropic's SDK directly but still routing through the AI-API for some requests.
 
 ### Anthropic Integration
+
 ```javascript
 // code-editor/pages/api/ai.js
 import Anthropic from "@anthropic-ai/sdk";
@@ -85,6 +89,7 @@ const api = new Anthropic({
 ```
 
 ### System Prompt Engineering
+
 The code-editor service uses sophisticated system prompts to generate interactive web applications:
 
 ```javascript
@@ -137,12 +142,12 @@ Services seamlessly discover the AI-API through Docker Compose environment varia
 chat-gpt:
   environment:
     - AI_API_MK=${AI_API_MK}
-    - # other env vars...
-  
+    -  # other env vars...
+
 code-editor:
   environment:
     - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-    - # other env vars...
+    -  # other env vars...
 ```
 
 The Traefik routing ensures services can reach the AI-API at predictable URLs (`/ai-api`), making the integration location-transparent.
@@ -152,17 +157,20 @@ The Traefik routing ensures services can reach the AI-API at predictable URLs (`
 This integration pattern provides several advantages:
 
 ### Development Simplicity
+
 - **Single SDK** - Most services use OpenAI SDK regardless of actual provider
 - **Consistent patterns** - Same authentication and URL structure across services
 - **Easy testing** - Switch models by changing a string parameter
 
-### Operational Benefits  
+### Operational Benefits
+
 - **Centralized logging** - All AI requests flow through one point
 - **Cost visibility** - Track AI spending across all services
 - **Rate limiting** - Implement usage controls at the API gateway level
 - **Provider flexibility** - Switch providers without changing service code
 
 ### Security Advantages
+
 - **Credential isolation** - Provider API keys stored in one secure location
 - **Access control** - AI capabilities gated behind authentication
 - **Audit trail** - Central logging of all AI interactions
