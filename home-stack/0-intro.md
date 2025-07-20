@@ -2,7 +2,7 @@
 
 I thoroughly enjoy creating software. I would classify myself as a full-stack developer, with a preference for back-end development, but I also enjoy tackling front-end challenges.
 
-About 10 years ago, I started working with containers. Before that, I had a more classic approach of developing on provisioned servers or VMs. As soon as I started working with containers, specifically Docker, I knew I wanted my HomeStack to follow a service-oriented architecture.
+Around 2015, I started working with containers. Before that, I had a more classic approach of developing on provisioned servers or VMs. As soon as I started working with containers, specifically Docker, I knew I wanted my HomeStack to follow a service-oriented architecture.
 
 HomeStack is what I refer to as the tech stack I use for my side projects. I think of it as similar to a mechanic's home garage. It has just enough tools to handle most operations, but it isn't scaled to the level of their day job shop.
 
@@ -28,10 +28,6 @@ I use the free version of [Auth0](https://auth0.com/) for authentication, along 
 
 I don't utilize a managed MySQL service; rather, it is another container running on my server. A key unlock for me was managing schema changes, which I use [Skeema](https://www.skeema.io/) for.
 
-[5. APIs and UIs](/blog/home-stack/5-apis-and-uis.md)
-
-For APIs, I mainly use [Tornado](https://www.tornadoweb.org/en/stable/), and for UIs, I use [NextJS](https://nextjs.org/).
-
-[6. Development and Utilities](/blog/home-stack/6-development-and-utilities.md)
+[5. Development and Utilities](/blog/home-stack/5-development-and-utilities.md)
 
 I'm a [vim/screen](https://github.com/photodialectic/tilde) user, mainly because I like playing in the terminal still. I do have [CoPilot](https://github.com/github/copilot.vim) installed, and also a modified [vim-ai](https://github.com/photodialectic/vim-ai) plugin for AI Chat.

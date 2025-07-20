@@ -1,14 +1,17 @@
 # Creating a Blog API using Git as the Datastore
+
 Some time ago, I became interested in the concept of using [git](https://en.wikipedia.org/wiki/Git) as a datastore/CMS for a blog. I found the idea of using branching and merging for drafts, as well as versioning for posts, to be intriguing. Additionally, I wanted to test my ability to create a basic API that could be utilized for interacting with the blog. This is the outcome of my experiment.
 
 ## Tech stack
+
 - [Python](https://www.python.org/)
 - [Torando](https://www.tornadoweb.org/en/stable/)
 - [Pygit2](https://www.pygit2.org/)
 
-Python is the language I feel most comfortable with and Tornado is a web framework that I have used in the past. Pygit2 is a Python binding for libgit2, which is a C implementation of git. I used pygit2 originally as this was a refactor of my original blog-api project. The original project used a bitbucket repoo which I have since lost the credentials to (I'm pretty sure I originally created a bitbucket account with my github oAuth - this was before github had private repos and I have since lost access and decided to make the repo public anyway).
+Python is the language I feel most comfortable with and Tornado is a web framework that I have used in the past. Pygit2 is a Python binding for libgit2, which is a C implementation of git.
 
 ### Dockerfile
+
 I have the following Dockerfile to build the image - It will install pygit2 and checkout the repo to `/content`.
 
 ```language-bash
@@ -34,16 +37,21 @@ CMD ["python", "/app/service.py"]
 ```
 
 ## API Design
-I wanted to keep the API straightfoward so there are really one a endpoints
+
+I wanted to keep the API straightfoward so there are really just a few [endpoints](https://www.nickhedberg.com/docs/oas/blog-api.yml)
+
 - `GET /v1/branches` - List all branches
 - `GET /v1/entries` - List all entries (essentially the file system)
 - `GET /v1/entries/:path` - The path could resolve to either a tree or blob. If its a blob it'll render the contents
 
 ### API Utils
+
 I'm used to the idea of just `git checkout <branch>` and then `git pull`. I didn't find this to be as straightfoward with pygit2. So I had to write some utility functions to help me with this.
 
 #### `get_repo`
+
 I wanted to centralize the process of getting the repository to ensure that I set a user. This comes in handy when we pull down a branch.
+
 ```language-python
 def get_repo(self):
     repo = pygit2.Repository("/content")
@@ -53,7 +61,9 @@ def get_repo(self):
 ```
 
 #### `local_branch`
+
 In order to pull down a branch, we need a local branch (ideally with the same name) to merge changes into. Without this, I found that changes will be merged into the main branch, which is not desired. We want to be able to switch between branches.
+
 ```language-python
 def local_branch(self, repo, branch_name, remote_branch):
     local_branch = None
@@ -71,7 +81,9 @@ def local_branch(self, repo, branch_name, remote_branch):
 ```
 
 #### `pull`
+
 This function is responsible for pulling down changes from a remote branch. It will establish a local branch, check if the branch is up to date, fast-forward the branch if possible, or merge changes if necessary. If there are conflicts, it will return a 409 status code.
+
 ```language-python
 def pull(self, repo, branch):
     remote_name = "origin"
@@ -134,7 +146,9 @@ def pull(self, repo, branch):
 ```
 
 #### `get_tree_structure`
+
 This function will return the tree structure of the repository. It will recursively call itself to get the tree structure of any subdirectories.
+
 ```language-python
 def get_tree_structure(self, repo, tree):
     files = []
@@ -153,7 +167,9 @@ def get_tree_structure(self, repo, tree):
 ```
 
 #### `get_tree_from_path`
+
 This function will return the tree structure of a specific path. It will return the tree structure of the repository if the path is empty. If the path is not empty, it will traverse the tree structure to find the path.
+
 ```language-python
 def get_tree_from_path(self, repo, path):
     tree = repo.get(repo.head.target).tree
@@ -173,4 +189,5 @@ def get_tree_from_path(self, repo, path):
 ```
 
 ## Conclusion
+
 This post is written and served via the Blog API it descibes. That's all for now.
