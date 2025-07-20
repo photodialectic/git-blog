@@ -1,0 +1,1 @@
+I call my tech stack for side projects "HomeStack." It's like a mechanic's personal garage, equipped with just enough tools to tackle most tasks, but not as extensive as the setup they use at their professional workshop. These posts explore some of the ways I organize my infrastructure - sorta like a shop tour.

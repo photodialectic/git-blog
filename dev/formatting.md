@@ -1,8 +1,9 @@
 # Formatting
+
 I use these two scripts to format code. I don't use an IDE so a portable solution is nice.
 
-
 ## `fmtjs`
+
 ```language-bash
 #!/bin/bash
 
@@ -10,6 +11,7 @@ docker run --rm -v `pwd`:/work tmknom/prettier --write $1
 ```
 
 ## `fmtpy`
+
 ```language-bash
 #!/bin/bash
 
