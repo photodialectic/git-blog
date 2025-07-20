@@ -17,7 +17,7 @@ The key advantages that sold me on Traefik:
 
 My Traefik setup uses Docker Compose with configuration passed as command-line arguments. Here's the core `site-router` service:
 
-```yaml
+```language-yaml
 site-router:
   container_name: site-router
   image: traefik:v3.3.1
@@ -52,7 +52,7 @@ Key configuration points:
 
 Each service in my stack integrates with Traefik using Docker labels. Here's a typical example from my chat-gpt service:
 
-```yaml
+```language-yaml
 chat-gpt:
   labels:
     - traefik.enable=true
@@ -75,7 +75,7 @@ This configuration:
 
 Some services need URL path modification. For example, my blog API expects requests without the `/blog-api` prefix:
 
-```yaml
+```language-yaml
 nickhedberg_blog_api:
   labels:
     - traefik.http.routers.nickhedberg_blog_api.middlewares=nickhedberg_blog_api-stripprefix
@@ -86,7 +86,7 @@ nickhedberg_blog_api:
 
 My main site handles both `nickhedberg.com` and `www.nickhedberg.com`, with automatic redirects:
 
-```yaml
+```language-yaml
 nickhedberg_site:
   labels:
     - traefik.http.routers.nickhedberg_site.rule=Host(`www.nickhedberg.com`) || Host(`nickhedberg.com`)

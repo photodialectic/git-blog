@@ -15,7 +15,7 @@ Managing multiple AI provider APIs (OpenAI, Anthropic, Google) across different 
 
 My AI-API runs as a Docker container in the HomeStack with this LiteLLM configuration:
 
-```yaml
+```language-yaml
 model_list:
   # OpenAI Models
   - model_name: gpt-4o-mini
@@ -69,7 +69,7 @@ litellm_settings:
 
 The AI-API service integrates seamlessly into my Docker Compose stack:
 
-```yaml
+```language-yaml
 ai-api:
   container_name: ai-api
   image: ghcr.io/berriai/litellm:main-latest
@@ -104,7 +104,7 @@ Services can now use any AI model through a single endpoint:
 
 ### Chat Completion
 
-```javascript
+```language-javascript
 const response = await fetch(
   "https://www.nickhedberg.com/ai-api/chat/completions",
   {
@@ -123,7 +123,7 @@ const response = await fetch(
 
 ### Model Switching
 
-```javascript
+```language-javascript
 // Switch providers without changing code
 const models = ["gpt-4o-mini", "claude-3-5-sonnet", "gemini-2.0-flash"];
 const model = models[Math.floor(Math.random() * models.length)];

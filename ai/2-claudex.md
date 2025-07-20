@@ -41,7 +41,7 @@ Claudex addresses these concerns through containerization with strict isolation:
 
 Claudex is distributed as a Go CLI that manages Docker containers:
 
-```bash
+```language-bash
 # Install from source
 git clone https://github.com/photodialectic/claudex.git
 cd claudex
@@ -53,7 +53,7 @@ claudex build
 
 The Dockerfile creates a secure environment:
 
-```dockerfile
+```language-dockerfile
 FROM ubuntu:22.04
 
 # Install development tools
@@ -80,7 +80,7 @@ ENTRYPOINT ["/init-firewall.sh"]
 
 ### Basic Project Development
 
-```bash
+```language-bash
 # Mount current project and start AI session
 claudex
 
@@ -90,14 +90,14 @@ claudex service1/ service2/ service3/
 
 ### With Instructions Context
 
-```bash
+```language-bash
 # Include project documentation for AI context
 claudex --include ./docs
 ```
 
 ### Network Access for OAuth
 
-```bash
+```language-bash
 # Allow network access for authentication flows
 claudex --host-network
 ```
@@ -141,7 +141,7 @@ Claudex integrates seamlessly with my AI-API through configuration:
 
 ### Claude Code Configuration
 
-```json
+```language-json
 // ~/.claude.json
 {
   "apiUrl": "https://www.nickhedberg.com/ai-api",
@@ -152,7 +152,7 @@ Claudex integrates seamlessly with my AI-API through configuration:
 
 ### Codex Configuration
 
-```toml
+```language-toml
 # ~/.codex/config.toml
 [model_providers.nhdc_ai_api]
 name = "HomeStack AI API"
@@ -172,7 +172,7 @@ This routes all AI requests through my centralized AI-API instead of directly to
 
 Claudex supports Model Context Protocol (MCP) servers running in Docker:
 
-```json
+```language-json
 // ~/.claude.json
 {
   "mcpServers": {
@@ -188,7 +188,7 @@ Claudex supports Model Context Protocol (MCP) servers running in Docker:
 
 You can even run Codex as an MCP server within Claude:
 
-```json
+```language-json
 {
   "mcpServers": {
     "codex": {
@@ -215,7 +215,7 @@ Claudex provides multiple layers of security:
 
 A typical Claudex session looks like:
 
-```bash
+```language-bash
 # Start secure AI development environment
 claudex ./my-project
 

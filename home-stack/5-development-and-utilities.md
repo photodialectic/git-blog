@@ -20,7 +20,7 @@ While Make commands provide basic automation, a dedicated CLI offers several adv
 
 The CLI wraps common operations with a consistent interface:
 
-```bash
+```language-bash
 # Service lifecycle
 nhdc create -t next-js myservice     # Create new service from template
 nhdc up myservice                    # Start specific services
@@ -61,7 +61,7 @@ Templates include:
 
 The CLI uses a YAML configuration file for environment-specific settings:
 
-```yaml
+```language-yaml
 # ~/.nhdc/config.yaml
 default_env: dev
 
@@ -88,7 +88,7 @@ Continuous deployment is handled through GitHub Actions, providing automatic dep
 
 The CI pipeline is straightforward but effective:
 
-```yaml
+```language-yaml
 # .github/workflows/deploy.yml (conceptual)
 name: Deploy to Production
 on:
@@ -137,7 +137,7 @@ Beyond the CLI, I maintain a collection of development scripts for common operat
 
 Consistent code formatting is handled through Docker-based formatters:
 
-```bash
+```language-bash
 # JavaScript/TypeScript formatting
 ./scripts/fmtjs src/
 # Uses: docker run --rm -v $(pwd):/work tmknom/prettier --write $1
@@ -157,7 +157,7 @@ My HomeStack includes a centralized health monitoring system that provides both 
 
 Services are defined in a YAML configuration file:
 
-```yaml
+```language-yaml
 # nickhedberg_site/health.yml
 sites:
   - name: AI API
@@ -176,7 +176,7 @@ sites:
 
 The main site includes a health endpoint (`/health`) that asynchronously checks all configured services:
 
-```python
+```language-python
 class HealthHandler(BaseHandler):
     async def health_check(self, url):
         http_client = httpclient.AsyncHTTPClient()
@@ -259,7 +259,7 @@ docs/
 
 Each service has its own OpenAPI spec file that defines its API contract:
 
-```yaml
+```language-yaml
 # docs/specs/ai-api.yml
 openapi: 3.1.0
 info:
@@ -281,7 +281,7 @@ The docs service provides two different documentation viewers:
 
 **Swagger UI Interface** (`/docs/oas/ai-api.yml`):
 
-```javascript
+```language-javascript
 // src/pages/oas/[...slug].js
 export default function SwaggerPage() {
   return <SwaggerUI deepLinking={true} url={`/docs/api/specs/${spec}`} />;
@@ -298,7 +298,7 @@ export default function SwaggerPage() {
 
 Specification files are served dynamically through an API endpoint:
 
-```javascript
+```language-javascript
 // src/pages/api/specs/[...file].js
 export default function handler(req, res) {
   const { file } = req.query;
