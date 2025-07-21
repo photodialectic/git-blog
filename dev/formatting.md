@@ -2,7 +2,7 @@
 
 I use these two scripts to format code. I don't use an IDE so a portable solution is nice.
 
-## `fmtjs`
+## fmtjs
 
 ```bash
 #!/bin/bash
@@ -10,7 +10,7 @@ I use these two scripts to format code. I don't use an IDE so a portable solutio
 docker run --rm -v `pwd`:/work tmknom/prettier --write $1
 ```
 
-## `fmtpy`
+## fmtpy
 
 ```bash
 #!/bin/bash
