@@ -1,6 +1,6 @@
 # Claudex: Secure Containerized AI Development
 
-AI agents like Claude Code and Codex are powerful development tools, but they come with security concerns. They can execute commands, access files, and make network requests. Claudex solves this by providing a secure, isolated Docker environment specifically designed for AI agent development.
+AI agents like Claude Code and Codex are powerful development tools, but they come with security concerns. They can execute commands, access files, and make network requests. [Claudex](https://github.com/photodialectic/claudex) solves this by providing a secure, isolated Docker environment specifically designed for AI agent development.
 
 ## The Security Problem
 
