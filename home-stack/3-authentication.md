@@ -16,29 +16,6 @@ For a HomeStack serving family and friends, the free tier provides plenty of hea
 
 ## Architecture Overview
 
-My authentication setup uses a centralized auth service that other applications delegate to:
-
-```mermaid
-graph TD
-    A[User Request] --> B[Traefik Router]
-    B --> C[HomeStack Service]
-    C --> D{Authenticated?}
-    D -->|No| E[Redirect to Auth Service]
-    E --> F[Centralized Auth Service]
-    F --> G[Auth0 SDK]
-    G --> H[Auth0 Tenant]
-    H --> I[OAuth Provider Login]
-    I --> J[Auth0 Callback]
-    J --> F
-    F --> K[Return to Service]
-    K --> C
-    D -->|Yes| L[Access Granted]
-
-    style H fill:#e1f5fe
-    style F fill:#f3e5f5
-    style C fill:#e8f5e8
-```
-
 Each service that requires authentication:
 
 1. Redirects unauthenticated users to `/auth/api/login`
@@ -159,39 +136,6 @@ This isolation ensures:
 - Development testing doesn't affect production users
 - Different callback URLs for local vs. deployed services
 - Separate user pools and configurations
-
-## User Experience Flow
-
-Here's what the authentication flow looks like for users:
-
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant S as HomeStack Service
-    participant A as Auth Service
-    participant Auth0 as Auth0 Tenant
-    participant P as OAuth Provider
-
-    U->>S: Visit protected service
-    S->>S: Check authentication
-    S-->>U: Redirect to /auth/api/login
-    U->>A: Access auth service
-    A->>Auth0: Initiate OAuth flow
-    Auth0-->>U: Redirect to login page
-    U->>P: Choose provider (Google/GitHub)
-    P->>U: Authenticate with provider
-    U->>Auth0: OAuth callback
-    Auth0->>A: Return with auth code
-    A->>A: Create session
-    A-->>U: Redirect back to service
-    U->>S: Return with session cookie
-    S->>S: Validate session
-    S-->>U: Access granted!
-
-    Note over U,S: Single Sign-On: User can now<br/>access other services seamlessly
-```
-
-The single sign-on experience means users authenticate once and access all services in the HomeStack.
 
 ## Advanced Features
 
