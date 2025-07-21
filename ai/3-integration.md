@@ -17,7 +17,7 @@ My chat-gpt service demonstrates the most complete AI integration, providing a f
 
 ### API Configuration
 
-```language-javascript
+```javascript
 // chat-gpt/pages/api/chat/completions.js
 import OpenAI from "openai";
 
@@ -29,7 +29,7 @@ const openai = new OpenAI({
 
 ### Model Listing
 
-```language-javascript
+```javascript
 // chat-gpt/pages/api/models.js
 export default withApiAuthRequired(async function handler(req, res) {
   const openai = new OpenAI({
@@ -48,7 +48,7 @@ This seamlessly exposes all available models (GPT, Claude, Gemini) through a sin
 
 The chat service also demonstrates AI function calling:
 
-```language-javascript
+```javascript
 const functionMap = {
   get_current_weather: {
     func: getCurrentWeather,
@@ -79,7 +79,7 @@ My code-editor service takes a different approach, using Anthropic's SDK directl
 
 ### Anthropic Integration
 
-```language-javascript
+```javascript
 // code-editor/pages/api/ai.js
 import Anthropic from "@anthropic-ai/sdk";
 
@@ -92,7 +92,7 @@ const api = new Anthropic({
 
 The code-editor service uses sophisticated system prompts to generate interactive web applications:
 
-```language-javascript
+```javascript
 const systemPrompt = `
 You are an AI that creates interactive web games using HTML, CSS, and JavaScript.
 
@@ -119,7 +119,7 @@ This demonstrates how different services can have specialized AI behaviors while
 
 All AI-enabled services integrate with Auth0 authentication, ensuring users have appropriate permissions:
 
-```language-javascript
+```javascript
 // Permission checking in models.js
 export default withApiAuthRequired(async function handler(req, res) {
   const { user } = await getSession(req, res);
@@ -137,7 +137,7 @@ This ensures AI capabilities are properly gated behind authentication and author
 
 Services seamlessly discover the AI-API through Docker Compose environment variables:
 
-```language-yaml
+```yaml
 # docker-compose.yml
 chat-gpt:
   environment:

@@ -6,7 +6,7 @@ This file demonstrates the enhanced markdown processing capabilities.
 
 Here's some JavaScript code:
 
-```language-javascript
+```javascript
 const openai = new OpenAI({
   apiKey: process.env.AI_API_MK,
   baseURL: `${req.headers.origin}/ai-api`,
@@ -15,7 +15,7 @@ const openai = new OpenAI({
 
 And some Python:
 
-```language-python
+```python
 def process_markdown(content):
     """Process markdown content with GitHub-compatible features"""
     if not content:
@@ -29,7 +29,7 @@ def process_markdown(content):
 
 YAML configuration:
 
-```language-yaml
+```yaml
 ai-api:
   container_name: ai-api
   image: ghcr.io/berriai/litellm:main-latest
