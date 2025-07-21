@@ -240,7 +240,7 @@ My HomeStack includes a dedicated documentation service that provides centralize
 
 The docs service is a NextJS application that serves OpenAPI specifications for each service:
 
-```
+```language-bash
 docs/
 ├── specs/           # OpenAPI YAML specifications
 │   ├── ai-api.yml

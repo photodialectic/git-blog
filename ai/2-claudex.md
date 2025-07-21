@@ -15,7 +15,7 @@ AI agents need broad system access to be useful, but this creates risks:
 
 Claudex addresses these concerns through containerization with strict isolation:
 
-```
+```language-bash
 ┌─────────────────────────────────────────┐
 │ Host System                             │
 │  ┌─────────────────────────────────────┐│
@@ -108,7 +108,7 @@ Inside the Claudex container, you get a fully configured development environment
 
 ### File System Layout
 
-```
+```language-bash
 /workspace/
 ├── service1/          # Your mounted projects
 ├── service2/
