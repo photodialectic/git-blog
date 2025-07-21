@@ -18,7 +18,7 @@ The trade-off is operational responsibility, but for a home lab this becomes a f
 
 My HomeStack runs on modest hardware, so MySQL is configured for minimal memory usage:
 
-``` ini
+```ini
 # low-memory-my.cnf
 [mysqld]
 # Core memory optimizations
@@ -52,7 +52,7 @@ This configuration reduces MySQL's memory footprint from ~400MB to under 50MB wh
 
 MySQL runs as a standard Docker container with persistent storage:
 
-``` yaml
+```yaml
 mysqldb:
   container_name: mysqldb
   environment:
@@ -81,7 +81,7 @@ The game-changer for my database workflow is [Skeema](https://www.skeema.io/), w
 
 Each service's schema is defined as SQL CREATE statements:
 
-``` bash
+```bash
 migration-cli/
   databases/
     chores/
@@ -97,7 +97,7 @@ migration-cli/
 
 Here's an example table definition:
 
-``` sql
+```sql
 -- chores/user.sql
 CREATE TABLE `user` (
   `id` binary(16) NOT NULL,
@@ -121,7 +121,7 @@ CREATE TABLE `user` (
 
 Schema changes follow a simple declarative workflow:
 
-``` bash
+```bash
 # 1. Edit the .sql files to match desired state
 vim databases/chores/user.sql
 
@@ -144,7 +144,7 @@ This approach has several advantages:
 
 Schema management runs in a dedicated container:
 
-``` dockerfile
+```dockerfile
 FROM golang:latest as builder
 RUN go install github.com/skeema/skeema@v1.12.0
 COPY . /app
@@ -154,7 +154,7 @@ ENTRYPOINT ["/bin/bash"]
 
 This provides a consistent environment with Skeema pre-installed, accessed via:
 
-``` bash
+```bash
 nhdc db migrate
 # Equivalent to:
 docker run -it -v `pwd`/migration-cli:/app --rm --env-file .env --network=mono_mysqldb migration-cli
@@ -166,7 +166,7 @@ docker run -it -v `pwd`/migration-cli:/app --rm --env-file .env --network=mono_m
 
 I use binary(16) UUIDs for primary keys across all tables:
 
-``` sql
+```sql
 `id` binary(16) NOT NULL,
 -- Selected as: bin_to_uuid(id) AS id
 ```
@@ -181,7 +181,7 @@ Benefits:
 
 MySQL's JSON column type handles semi-structured data:
 
-``` sql
+```sql
 `data` json NOT NULL,
 `profile_image_crop_data` json NULL
 ```
@@ -192,7 +192,7 @@ This provides schema flexibility without sacrificing query performance through g
 
 Most tables include soft delete support:
 
-``` sql
+```sql
 `deleted_at` datetime(6) DEFAULT NULL,
 ```
 

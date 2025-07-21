@@ -18,10 +18,25 @@ For a HomeStack serving family and friends, the free tier provides plenty of hea
 
 My authentication setup uses a centralized auth service that other applications delegate to:
 
-``` bash
-User Request � Traefik � Service � Auth0 SDK � Centralized Auth Service
-                                      �
-                                  Auth0 Tenant
+```mermaid
+graph TD
+    A[User Request] --> B[Traefik Router]
+    B --> C[HomeStack Service]
+    C --> D{Authenticated?}
+    D -->|No| E[Redirect to Auth Service]
+    E --> F[Centralized Auth Service]
+    F --> G[Auth0 SDK]
+    G --> H[Auth0 Tenant]
+    H --> I[OAuth Provider Login]
+    I --> J[Auth0 Callback]
+    J --> F
+    F --> K[Return to Service]
+    K --> C
+    D -->|Yes| L[Access Granted]
+
+    style H fill:#e1f5fe
+    style F fill:#f3e5f5
+    style C fill:#e8f5e8
 ```
 
 Each service that requires authentication:
@@ -34,7 +49,7 @@ Each service that requires authentication:
 
 The `auth` service handles all OAuth flows and provides authentication endpoints:
 
-``` javascript
+```javascript
 // pages/api/[auth0].js
 import { handleAuth, handleLogin, handleLogout } from "@auth0/nextjs-auth0";
 
@@ -69,7 +84,7 @@ Each NextJS service integrates authentication by:
 
 1. **Wrapping the app** with Auth0's UserProvider:
 
-``` javascript
+```javascript
 // _app.js
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 
@@ -88,7 +103,7 @@ export default function App({ Component, pageProps }) {
 
 2. **Adding minimal auth handlers**:
 
-``` javascript
+```javascript
 // pages/api/auth/[...auth0].js
 import { handleAuth } from "@auth0/nextjs-auth0";
 
@@ -97,7 +112,7 @@ export default handleAuth();
 
 3. **Using the useUser hook** in components:
 
-``` javascript
+```javascript
 import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function Dashboard() {
@@ -118,7 +133,7 @@ export default function Dashboard() {
 
 Services are configured with environment variables pointing to the centralized auth:
 
-``` yaml
+```yaml
 # docker-compose.yml
 chat-gpt:
   environment:
@@ -149,10 +164,32 @@ This isolation ensures:
 
 Here's what the authentication flow looks like for users:
 
-1. **Visit protected service** � Redirected to Auth0 login
-2. **Authenticate** � Choose from Google, GitHub, or email/password
-3. **Redirected back** � Return to original service with session
-4. **Seamless navigation** � Move between services without re-authentication
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant S as HomeStack Service
+    participant A as Auth Service
+    participant Auth0 as Auth0 Tenant
+    participant P as OAuth Provider
+
+    U->>S: Visit protected service
+    S->>S: Check authentication
+    S-->>U: Redirect to /auth/api/login
+    U->>A: Access auth service
+    A->>Auth0: Initiate OAuth flow
+    Auth0-->>U: Redirect to login page
+    U->>P: Choose provider (Google/GitHub)
+    P->>U: Authenticate with provider
+    U->>Auth0: OAuth callback
+    Auth0->>A: Return with auth code
+    A->>A: Create session
+    A-->>U: Redirect back to service
+    U->>S: Return with session cookie
+    S->>S: Validate session
+    S-->>U: Access granted!
+
+    Note over U,S: Single Sign-On: User can now<br/>access other services seamlessly
+```
 
 The single sign-on experience means users authenticate once and access all services in the HomeStack.
 
@@ -162,7 +199,7 @@ The single sign-on experience means users authenticate once and access all servi
 
 Some services extend Auth0's basic user information with application-specific data:
 
-``` javascript
+```javascript
 // After Auth0 login, set up app-specific profile
 const setupProfile = async (authUser) => {
   const response = await fetch("/api/user/setup", {
@@ -179,7 +216,7 @@ const setupProfile = async (authUser) => {
 
 Services implement their own authorization on top of Auth0 authentication:
 
-``` javascript
+```javascript
 if (!user) {
   return <LoginPrompt />;
 }
