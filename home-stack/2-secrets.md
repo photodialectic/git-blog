@@ -24,7 +24,7 @@ My secrets workflow revolves around two files:
 
 The core operations are straightforward:
 
-```language-bash
+```bash
 # Encrypt secrets for commit
 curl -s https://github.com/photodialectic.keys | age -R - .env > .env.age
 
@@ -38,7 +38,7 @@ The encrypt command fetches my public key from GitHub (where it's automatically 
 
 I've built secrets management into my HomeStack CLI tool to streamline the workflow:
 
-```language-go
+```bash
 // Encrypt with editor integration
 nhdc secrets encrypt
 
@@ -57,7 +57,7 @@ The CLI automatically opens your editor when encrypting, making it easy to add o
 
 Services access decrypted environment variables through Docker Compose's `--env-file` flag:
 
-```language-yaml
+```yaml
 services:
   chat-gpt:
     environment:

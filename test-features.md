@@ -6,7 +6,7 @@ This file demonstrates the enhanced markdown processing capabilities.
 
 Here's some JavaScript code:
 
-```language-javascript
+```javascript
 const openai = new OpenAI({
   apiKey: process.env.AI_API_MK,
   baseURL: `${req.headers.origin}/ai-api`,
@@ -15,21 +15,21 @@ const openai = new OpenAI({
 
 And some Python:
 
-```language-python
+```python
 def process_markdown(content):
     """Process markdown content with GitHub-compatible features"""
     if not content:
         return ""
-    
+
     md_processor.reset()
     html_content = md_processor.convert(tornado.escape.native_str(content))
-    
+
     return html_content
 ```
 
 YAML configuration:
 
-```language-yaml
+```yaml
 ai-api:
   container_name: ai-api
   image: ghcr.io/berriai/litellm:main-latest
@@ -42,19 +42,19 @@ ai-api:
 ## Task Lists
 
 - [x] Upgrade markdown processing
-- [x] Replace Prism.js with Highlight.js  
+- [x] Replace Prism.js with Highlight.js
 - [x] Add Mermaid support
 - [ ] Test all features
 - [ ] Deploy to production
 
 ## Tables
 
-| Feature | Status | Priority |
-|---------|--------|----------|
-| Syntax Highlighting | ✅ Complete | High |
-| Mermaid Diagrams | ✅ Complete | High |
-| Task Lists | ✅ Complete | Medium |
-| Admonitions | ✅ Complete | Low |
+| Feature             | Status      | Priority |
+| ------------------- | ----------- | -------- |
+| Syntax Highlighting | ✅ Complete | High     |
+| Mermaid Diagrams    | ✅ Complete | High     |
+| Task Lists          | ✅ Complete | Medium   |
+| Admonitions         | ✅ Complete | Low      |
 
 ## Mermaid Diagram
 
@@ -76,13 +76,13 @@ graph TD
 ## Admonitions
 
 !!! note "Information"
-    This is a note admonition. It provides additional context.
+This is a note admonition. It provides additional context.
 
 !!! warning "Warning"  
-    This is a warning admonition. Pay attention to this information.
+ This is a warning admonition. Pay attention to this information.
 
 !!! tip "Pro Tip"
-    This is a tip admonition with helpful advice.
+This is a tip admonition with helpful advice.
 
 ## Inline Code
 
