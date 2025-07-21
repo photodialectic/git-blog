@@ -18,7 +18,7 @@ For a HomeStack serving family and friends, the free tier provides plenty of hea
 
 My authentication setup uses a centralized auth service that other applications delegate to:
 
-```language-bash
+``` bash
 User Request � Traefik � Service � Auth0 SDK � Centralized Auth Service
                                       �
                                   Auth0 Tenant
@@ -34,7 +34,7 @@ Each service that requires authentication:
 
 The `auth` service handles all OAuth flows and provides authentication endpoints:
 
-```language-javascript
+``` javascript
 // pages/api/[auth0].js
 import { handleAuth, handleLogin, handleLogout } from "@auth0/nextjs-auth0";
 
@@ -69,7 +69,7 @@ Each NextJS service integrates authentication by:
 
 1. **Wrapping the app** with Auth0's UserProvider:
 
-```language-javascript
+``` javascript
 // _app.js
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 
@@ -88,7 +88,7 @@ export default function App({ Component, pageProps }) {
 
 2. **Adding minimal auth handlers**:
 
-```language-javascript
+``` javascript
 // pages/api/auth/[...auth0].js
 import { handleAuth } from "@auth0/nextjs-auth0";
 
@@ -97,7 +97,7 @@ export default handleAuth();
 
 3. **Using the useUser hook** in components:
 
-```language-javascript
+``` javascript
 import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function Dashboard() {
@@ -118,7 +118,7 @@ export default function Dashboard() {
 
 Services are configured with environment variables pointing to the centralized auth:
 
-```language-yaml
+``` yaml
 # docker-compose.yml
 chat-gpt:
   environment:
@@ -162,7 +162,7 @@ The single sign-on experience means users authenticate once and access all servi
 
 Some services extend Auth0's basic user information with application-specific data:
 
-```language-javascript
+``` javascript
 // After Auth0 login, set up app-specific profile
 const setupProfile = async (authUser) => {
   const response = await fetch("/api/user/setup", {
@@ -179,7 +179,7 @@ const setupProfile = async (authUser) => {
 
 Services implement their own authorization on top of Auth0 authentication:
 
-```language-javascript
+``` javascript
 if (!user) {
   return <LoginPrompt />;
 }

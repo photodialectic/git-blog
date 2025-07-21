@@ -14,7 +14,7 @@ Python is the language I feel most comfortable with and Tornado is a web framewo
 
 I have the following Dockerfile to build the image - It will install pygit2 and checkout the repo to `/content`.
 
-```language-bash
+``` bash
 FROM python:3.11
 
 RUN apt-get update && \
@@ -52,7 +52,7 @@ I'm used to the idea of just `git checkout <branch>` and then `git pull`. I didn
 
 I wanted to centralize the process of getting the repository to ensure that I set a user. This comes in handy when we pull down a branch.
 
-```language-python
+``` python
 def get_repo(self):
     repo = pygit2.Repository("/content")
     repo.config.set_multivar("user.name", "nh", "nh")
@@ -64,7 +64,7 @@ def get_repo(self):
 
 In order to pull down a branch, we need a local branch (ideally with the same name) to merge changes into. Without this, I found that changes will be merged into the main branch, which is not desired. We want to be able to switch between branches.
 
-```language-python
+``` python
 def local_branch(self, repo, branch_name, remote_branch):
     local_branch = None
     commit = repo.get(remote_branch.target)  # Resolve the Oid to a Commit
@@ -84,7 +84,7 @@ def local_branch(self, repo, branch_name, remote_branch):
 
 This function is responsible for pulling down changes from a remote branch. It will establish a local branch, check if the branch is up to date, fast-forward the branch if possible, or merge changes if necessary. If there are conflicts, it will return a 409 status code.
 
-```language-python
+``` python
 def pull(self, repo, branch):
     remote_name = "origin"
     remote_branch_ref = f"refs/remotes/{remote_name}/{branch}"
@@ -149,7 +149,7 @@ def pull(self, repo, branch):
 
 This function will return the tree structure of the repository. It will recursively call itself to get the tree structure of any subdirectories.
 
-```language-python
+``` python
 def get_tree_structure(self, repo, tree):
     files = []
     for entry in tree:
@@ -170,7 +170,7 @@ def get_tree_structure(self, repo, tree):
 
 This function will return the tree structure of a specific path. It will return the tree structure of the repository if the path is empty. If the path is not empty, it will traverse the tree structure to find the path.
 
-```language-python
+``` python
 def get_tree_from_path(self, repo, path):
     tree = repo.get(repo.head.target).tree
     for part in path.split("/"):
