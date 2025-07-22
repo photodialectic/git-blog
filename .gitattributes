@@ -1,0 +1,3 @@
+# .gitattributes for git-blog
+# Ensure markdown files are treated as text by Git
+*.md text
