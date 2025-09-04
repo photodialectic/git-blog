@@ -1,12 +1,13 @@
+
 # [Chat-GPT: AI Chat Application](/chat-gpt)
 
 A NextJS/React web application that provides a clean interface for AI conversations with multiple model support and persistent chat history.
 
 ## Overview
 
-I built this application in the summer of 2023 to help me explore OpenAI's API and play around with AI APIs in general. I use it daily as a alternative to ChatGPT for quick questions and brainstorming.
+I built this application in the summer of 2023 to explore OpenAI's API and experiment with AI APIs in general. I use it daily as an alternative to ChatGPT for quick questions and brainstorming.
 
-I continue to add features and improvements like tool calling, model switching backed by my self-hosted LiteLLM reverse proxy and my AI-API service, vision, code formatting, copy buttons, etc.
+I continue to add features such as tool calling; model switching backed by my self-hosted LiteLLM reverse proxy and AI-API service; vision support; code formatting; and copy buttons.
 
 ## Key Features
 

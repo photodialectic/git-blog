@@ -1,18 +1,19 @@
+
 # [Code-Editor: Browser-Based Development Environment](/code-editor)
 
 A NextJS/React application that provides a full-featured code editor with AI assistance, live bundling, and real-time preview capabilities directly in the browser.
 
 ## Overview
 
-Inspired by tools like CodeSandbox and Repl.it, this project creates a self-hosted development environment that runs entirely in the browser. It demonstrates advanced client-side bundling, AI integration, and real-time code execution without requiring server-side compilation.
+Inspired by tools like CodeSandbox and Replit, this project creates a self-hosted development environment that runs entirely in the browser. It demonstrates advanced client-side bundling, AI integration, and real-time code execution without requiring server-side compilation.
 
-I originally built this to explore building agentic tools that can write and patch code. Its limited to writing just three files: HTML, CSS, and JS.
+I originally built this to explore agentic tools that can write and patch code. It's limited to editing just three files: HTML, CSS, and JS.
 
 ## Key Features
 
 ### Code Editing & Execution
 - **Monaco Editor Integration**: Full VS Code editor experience with syntax highlighting and IntelliSense
-- **Live Bundling**: Real-time JavaScript/TypeScript compilation using ESBuild WebAssembly (haven't quite gotten this where I want it yet)
+- **Live Bundling**: Real-time JavaScript/TypeScript compilation using ESBuild WebAssembly (still a work in progress)
 - **Module Resolution**: Automatic npm package fetching and dependency resolution
 - **Preview System**: Instant code execution with isolated iframe rendering
 
@@ -103,7 +104,7 @@ Implementing npm module resolution in the browser required:
 
 ### Security Considerations
 Running user code safely requires:
-- **Iframe Sandboxing**: Strict CSP policies for code execution contexts
+- **Iframe sandboxing**: Strict CSP policies for code execution contexts
 - **API Limitations**: Restricted access to sensitive browser APIs
 - **Resource Limits**: Prevention of infinite loops and memory exhaustion
 

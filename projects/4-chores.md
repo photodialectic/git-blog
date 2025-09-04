@@ -1,12 +1,13 @@
+
 # [Chores: Family Task Management System](/chores)
 
 A NextJS/React application designed to gamify household chores and manage family responsibilities with goal tracking, approval workflows, and automated rotation systems.
 
 ## Overview
 
-I built this so my kids could save up for a Switch2 by performing chores/tasks around the house. After they earned the Switch2, we continued to use it as a family. Anyone can create a family, invite members via QR code, and start assigning chores with photo submission and approval workflows. The app includes gamification elements like progress tracking, achievements, and statistics to keep everyone motivated.
+I built this so my kids could save up for a Switch 2 by performing chores/tasks around the house. After they earned the Switch 2, we continued to use it as a family. Anyone can create a family, invite members via QR code, and start assigning chores with photo submission and approval workflows. The app includes gamification elements like progress tracking, achievements, and statistics to keep everyone motivated.
 
-The main idea is the kids will submit chores for approval which helps develop skills like accountibility and determining a value for their work. It very deliberately does not allow parents to assign chores or reward points directly. The kids have to decide what chores they want to do and submit them for approval. This helps them learn to manage their own responsibilities.
+The main idea is that kids submit chores for approval, which helps develop skills like accountability and understanding the value of their work. It deliberately does not allow parents to assign chores or reward points directly. Kids decide which chores they want to do and submit them for approval, helping them learn to manage their own responsibilities.
 
 ## Key Features
 

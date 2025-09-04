@@ -1,10 +1,11 @@
+
 # [MC-Skins: Minecraft Skin Editor](/mc-skins)
 
 A NextJS/React application that provides pixel-level Minecraft skin editing with real-time 3D preview and community sharing features.
 
 ## Overview
 
-Built for the Minecraft community (my kids and their friends), this skin editor allows users to create and modify Minecraft character skins with precision. The application demonstrates advanced canvas manipulation, 3D rendering, and real-time collaborative features within a web browser. It has an experimental collaboration mode for multiple users to edit the same skin simultaneously.
+Built for the Minecraft community (my kids and their friends), this skin editor allows users to create and modify Minecraft character skins with precision. The application demonstrates advanced canvas manipulation, 3D rendering, and real-time collaborative features within a web browser. It also includes an experimental collaboration mode for multiple users to edit the same skin simultaneously.
 
 ## Key Features
 
@@ -17,7 +18,7 @@ Built for the Minecraft community (my kids and their friends), this skin editor 
 
 ### 3D Preview System
 - **Real-Time Rendering**: Live 3D character model updates as you edit
-- **Multiple Views**: Front, back, side, and rotating views of the character
+- **Multiple Views**: Front, back, sides, and rotating views of the character
 - **Animation Support**: Character poses and walking animations
 - **Lighting Controls**: Adjustable lighting to preview skin appearance in-game
 
