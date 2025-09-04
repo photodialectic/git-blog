@@ -1,16 +1,19 @@
-# Code-Editor: Browser-Based Development Environment
+
+# [Code-Editor: Browser-Based Development Environment](/code-editor)
 
 A NextJS/React application that provides a full-featured code editor with AI assistance, live bundling, and real-time preview capabilities directly in the browser.
 
 ## Overview
 
-Inspired by tools like CodeSandbox and Repl.it, this project creates a self-hosted development environment that runs entirely in the browser. It demonstrates advanced client-side bundling, AI integration, and real-time code execution without requiring server-side compilation.
+Inspired by tools like CodeSandbox and Replit, this project creates a self-hosted development environment that runs entirely in the browser. It demonstrates advanced client-side bundling, AI integration, and real-time code execution without requiring server-side compilation.
+
+I originally built this to explore agentic tools that can write and patch code. It's limited to editing just three files: HTML, CSS, and JS.
 
 ## Key Features
 
 ### Code Editing & Execution
 - **Monaco Editor Integration**: Full VS Code editor experience with syntax highlighting and IntelliSense
-- **Live Bundling**: Real-time JavaScript/TypeScript compilation using ESBuild WebAssembly
+- **Live Bundling**: Real-time JavaScript/TypeScript compilation using ESBuild WebAssembly (still a work in progress)
 - **Module Resolution**: Automatic npm package fetching and dependency resolution
 - **Preview System**: Instant code execution with isolated iframe rendering
 
@@ -54,7 +57,7 @@ components/AIPromptBox/
 ### Code Execution System
 The application uses a sandboxed iframe approach for code execution:
 - **Isolation**: Each preview runs in a separate iframe context
-- **Security**: CSP headers and sandboxing prevent malicious code execution  
+- **Security**: CSP headers and sandboxing prevent malicious code execution
 - **Real-time Updates**: Code changes trigger immediate re-bundling and preview updates
 - **Error Handling**: Runtime errors captured and displayed with AI analysis
 
@@ -81,7 +84,7 @@ const aiTools = {
 ### File Management System
 Virtual file system enabling multi-file projects:
 - **In-Memory Storage**: Files stored in browser memory with persistence options
-- **File Tree UI**: Visual file explorer with create/delete/rename operations  
+- **File Tree UI**: Visual file explorer with create/delete/rename operations
 - **Import/Export**: Full project import/export functionality
 - **Version Control**: Basic file history and change tracking
 
@@ -101,23 +104,8 @@ Implementing npm module resolution in the browser required:
 
 ### Security Considerations
 Running user code safely requires:
-- **Iframe Sandboxing**: Strict CSP policies for code execution contexts
+- **Iframe sandboxing**: Strict CSP policies for code execution contexts
 - **API Limitations**: Restricted access to sensitive browser APIs
 - **Resource Limits**: Prevention of infinite loops and memory exhaustion
-
-## Use Cases
-
-The code editor excels for:
-- **Rapid Prototyping**: Quick idea testing without local environment setup
-- **Learning & Teaching**: Interactive code examples and tutorials
-- **Code Sharing**: Easily shareable working code examples
-- **AI-Assisted Development**: Learning new APIs with AI guidance
-
-## Performance Characteristics
-
-- **Initial Load**: ~3-5 seconds for full editor with bundling capability
-- **Bundle Time**: <500ms for typical projects under 100KB
-- **Memory Usage**: ~50-100MB depending on project complexity
-- **Network**: Minimal after initial load, only fetching new npm packages
 
 The combination of client-side bundling, AI assistance, and real-time preview creates a powerful development environment that runs entirely in the browser while maintaining near-native performance.

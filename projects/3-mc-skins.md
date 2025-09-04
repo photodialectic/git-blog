@@ -1,10 +1,11 @@
-# MC-Skins: Minecraft Skin Editor
+
+# [MC-Skins: Minecraft Skin Editor](/mc-skins)
 
 A NextJS/React application that provides pixel-level Minecraft skin editing with real-time 3D preview and community sharing features.
 
 ## Overview
 
-Built for the Minecraft community, this skin editor allows users to create and modify Minecraft character skins with precision. The application demonstrates advanced canvas manipulation, 3D rendering, and real-time collaborative features within a web browser.
+Built for the Minecraft community (my kids and their friends), this skin editor allows users to create and modify Minecraft character skins with precision. The application demonstrates advanced canvas manipulation, 3D rendering, and real-time collaborative features within a web browser. It also includes an experimental collaboration mode for multiple users to edit the same skin simultaneously.
 
 ## Key Features
 
@@ -17,7 +18,7 @@ Built for the Minecraft community, this skin editor allows users to create and m
 
 ### 3D Preview System
 - **Real-Time Rendering**: Live 3D character model updates as you edit
-- **Multiple Views**: Front, back, side, and rotating views of the character
+- **Multiple Views**: Front, back, sides, and rotating views of the character
 - **Animation Support**: Character poses and walking animations
 - **Lighting Controls**: Adjustable lighting to preview skin appearance in-game
 
@@ -93,7 +94,7 @@ Supporting multiple Minecraft skin formats:
 
 ### Editor Layout
 - **Tool Palette**: Left sidebar with drawing tools and options
-- **Canvas Area**: Center stage with zoom and pan controls  
+- **Canvas Area**: Center stage with zoom and pan controls
 - **3D Preview**: Right panel with rotating character model
 - **Color Controls**: Bottom panel with color picker and palette
 
@@ -114,18 +115,5 @@ The editor adapts to different screen sizes:
 - **WebGL Optimization**: Efficient vertex buffers and texture management
 - **Frame Rate Control**: Maintain 60fps during real-time preview updates
 - **Resource Loading**: Progressive loading of 3D assets and textures
-
-## Community Integration
-
-### Sharing Features
-- **Public Gallery**: Browse community-created skins
-- **Rating System**: Community voting on skin quality
-- **Search & Filter**: Find skins by style, popularity, or creator
-- **Download Statistics**: Track skin popularity and usage
-
-### User Profiles  
-- **Skin Portfolio**: Personal gallery of created skins
-- **Creation Statistics**: Track editing time and skin variations
-- **Social Features**: Follow favorite creators and share creations
 
 The MC-Skins editor combines precise pixel art tools with real-time 3D preview to create an intuitive skin creation experience that rivals desktop applications while running entirely in the browser.
