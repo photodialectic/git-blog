@@ -1,10 +1,12 @@
-# Chat-GPT: AI Chat Application
+# [Chat-GPT: AI Chat Application](/chat-gpt)
 
 A NextJS/React web application that provides a clean interface for AI conversations with multiple model support and persistent chat history.
 
 ## Overview
 
-Built as one of my first major AI integration projects, this chat application demonstrates how to create a user-friendly interface for AI interactions while managing the complexities of streaming responses, chat persistence, and user authentication.
+I built this application in the summer of 2023 to help me explore OpenAI's API and play around with AI APIs in general. I use it daily as a alternative to ChatGPT for quick questions and brainstorming.
+
+I continue to add features and improvements like tool calling, model switching backed by my self-hosted LiteLLM reverse proxy and my AI-API service, vision, code formatting, copy buttons, etc.
 
 ## Key Features
 
@@ -19,17 +21,11 @@ Built as one of my first major AI integration projects, this chat application de
 - **Chat Organization**: Browse and resume previous conversations
 - **Real-time Streaming**: Responses stream in real-time for better user experience
 
-### User Experience
-- **Auth0 Integration**: Secure user authentication and profile management
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
-- **Error Boundaries**: Graceful error handling with user-friendly feedback
-- **Loading States**: Visual indicators for all async operations
-
 ## Technical Architecture
 
 ### Frontend Stack
 - **NextJS**: React framework with API routes for backend integration
-- **Custom Hooks**: 
+- **Custom Hooks**:
   - `useChatAutoSave`: Automatic saving of chat content
   - `useChatData`: Chat history and message management
   - `useChatSettings`: User preferences and model selection
@@ -65,17 +61,3 @@ Custom React hooks automatically save chat content to prevent data loss, with de
 
 ### Tool Integration
 The chat interface supports AI tool calling, allowing the AI to execute functions and integrate external data sources during conversations.
-
-## Development Experience
-
-This project taught me valuable lessons about:
-- **State Management**: Complex chat state requires careful coordination between multiple React hooks
-- **Real-time UX**: Streaming responses need thoughtful loading states and error handling
-- **Database Design**: Chat history schema must balance query performance with data integrity
-- **Authentication Flow**: Integrating Auth0 with NextJS requires careful session management
-
-The codebase includes comprehensive tests covering both component behavior and API integration, ensuring reliability in a production environment.
-
-## Live Application
-
-The chat application runs at `/chat-gpt` on my HomeStack, integrated with my unified authentication system and connected to my AI-API for model access.

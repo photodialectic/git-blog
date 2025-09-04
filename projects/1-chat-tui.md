@@ -4,7 +4,7 @@ A Go-based terminal user interface for AI conversations built with Bubble Tea, p
 
 ## Overview
 
-After building the web-based chat-gpt application, I wanted a terminal-native way to interact with AI models. Chat-TUI fills this gap by providing a fully-featured chat interface that runs in the terminal with persistent configuration and seamless model switching.
+After building the web-based [/chat-gpt](/chat-gpt) application, I wanted a terminal-native way to interact with AI models. Chat-TUI fills this gap by providing a fully-featured chat interface that runs in the terminal with persistent configuration and seamless model switching. This also gave me an opportunity to prove out an access token authentication flow using Auth0.
 
 ## Key Features
 
@@ -47,12 +47,6 @@ ui/               # Bubble Tea interface components
 ├── update.go     # Event handling
 └── commands.go   # Command processing
 ```
-
-### Streaming Architecture
-The application handles real-time AI responses through Go's streaming HTTP client, processing chunks as they arrive and updating the terminal display incrementally.
-
-### State Persistence
-Chat history and configuration are automatically saved to the filesystem, with Docker volume support for containerized deployments.
 
 ## Command System
 
