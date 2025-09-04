@@ -6,6 +6,8 @@ A unified AI gateway that consolidates multiple AI providers (OpenAI, Anthropic,
 
 As AI capabilities became central to my HomeStack projects, managing multiple API keys, different request formats, and cost tracking across providers became unwieldy. AI-API solves this by creating a unified interface that abstracts away provider-specific implementations while adding observability and control layers.
 
+![AI-API Screenshot](https://www.nickhedberg.com/images/lk5BCDIikGZrClW1vf2bIVtsKtI=/fit-in/1200x1200/https://s3-us-west-2.amazonaws.com/nick-hedberg/img%2F1794%3A2172%2F0a4a038d73233d622e1c89c29034014544eb94af.png)
+
 ## Key Features
 
 ### Provider Unification

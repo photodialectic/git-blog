@@ -7,6 +7,8 @@ A Go-based terminal user interface for AI conversations built with Bubble Tea, p
 
 After building the web-based [/chat-gpt](/chat-gpt) application, I wanted a terminal-native way to interact with AI models. Chat-TUI fills this gap by providing a fully featured chat interface that runs in the terminal with persistent configuration and seamless model switching. This also gave me an opportunity to validate an access-token authentication flow using Auth0.
 
+![Chat-TUI Screenshot](https://www.nickhedberg.com/images/_fMYBnc0-74LbZu9z4qWcX5z38c=/fit-in/1200x1200/https://s3-us-west-2.amazonaws.com/nick-hedberg/img%2F1080%3A1516%2Fb1ded00e91eda1003a83119d783953a5ddba7d1c.png)
+
 ## Key Features
 
 ### Terminal-Native Interface
