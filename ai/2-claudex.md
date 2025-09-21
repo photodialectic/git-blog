@@ -1,15 +1,10 @@
 # Claudex: Secure Containerized AI Development
 
-AI agents like Claude Code and Codex are powerful development tools, but they come with security concerns. They can execute commands, access files, and make network requests. [Claudex](https://github.com/photodialectic/claudex) solves this by providing a secure, isolated Docker environment specifically designed for AI agent development.
+Originally I built [Claudex](https://github.com/photodialectic/claudex) because I had security concerns about AI Agent CLIs like [Claude Code](https://claude.ai/code) and [Codex](https://codex.dev). These tools are incredibly powerful, but they also have the ability to read and write files, execute commands, and make network requests.
 
-## The Security Problem
+As these tools mature, some of them are mitigating these security risks and implementing features that give users more explicit control over risks like network and file system access. While I still have some concerns around security, that's becoming less of a reason for me to use Claudex. Instead I find Claudex useful because it’s very portable, I can control its context very explicitly, and it allows me to stay in my terminal and use my own editor and tools.
 
-AI agents need broad system access to be useful, but this creates risks:
-
-- **File system access** - agents can read sensitive files or modify critical code
-- **Network access** - agents might leak data or download malicious content
-- **Command execution** - agents can run potentially dangerous system commands
-- **Workspace persistence** - no tracking of what changes agents make
+I use Claudex locally and on remote servers to plan, debug, and develop new features.
 
 ## Claudex Architecture
 
@@ -36,6 +31,7 @@ Claudex addresses these concerns through containerization with strict isolation:
 - **File system sandboxing** through selective mounting
 - **Git-based change tracking** for all modifications
 - **Pre-installed AI CLIs** (claude-code, codex)
+- **Container sessions** with naming, parallel mode, list/destroy management
 
 ## Installation and Setup
 
@@ -45,35 +41,10 @@ Claudex is distributed as a Go CLI that manages Docker containers:
 # Install from source
 git clone https://github.com/photodialectic/claudex.git
 cd claudex
-./install /usr/local/bin
+make install
 
 # Build the container image
 claudex build
-```
-
-The Dockerfile creates a secure environment:
-
-```dockerfile
-FROM ubuntu:22.04
-
-# Install development tools
-RUN apt-get update && apt-get install -y \
-    git curl wget \
-    ripgrep fd-find jq fzf tree \
-    iptables sudo
-
-# Install AI CLIs
-RUN curl -sSL https://claude.ai/install | sh
-RUN curl -sSL https://codex.dev/install | sh
-
-# Create isolated user
-RUN useradd -m -s /bin/bash node
-USER node
-WORKDIR /workspace
-
-# Initialize firewall on container start
-COPY init-firewall.sh /init-firewall.sh
-ENTRYPOINT ["/init-firewall.sh"]
 ```
 
 ## Usage Examples
@@ -81,25 +52,70 @@ ENTRYPOINT ["/init-firewall.sh"]
 ### Basic Project Development
 
 ```bash
-# Mount current project and start AI session
+# Start a session mounting the current directory
 claudex
 
-# Mount multiple services
+# Mount multiple services into one session
 claudex service1/ service2/ service3/
+
+# Name a session, or force a parallel session
+claudex --name my-api ./api
+claudex --parallel ./app ./api
 ```
 
-### With Instructions Context
+### Push a spec or screenshot
 
 ```bash
-# Include project documentation for AI context
-claudex --include ./docs
+claudex push SPEC.md screenshot.png
+# Files are copied into /workspace inside the running container
 ```
 
-### Network Access for OAuth
+### Pull files created by the AI
+
+I often use my prod server to run claudex and an agent in read-only to develop a feature plan remotely.
+
+The agent may create artifacts in `/workspace` (outside mounted project directories). Use `claudex pull` to copy them to your host.
+
+Note: the destination is a directory. Use `.` to copy into the current directory, or provide an output folder.
+
+```bash
+# Copy SPEC.md from the container to the current directory
+claudex pull /workspace/SPEC.md .
+
+# Or copy a folder into an output directory
+claudex pull /workspace/output ./out
+```
+
+I will often use this local file to create an issue in my project's git repo using the GitHub CLI:
+
+```bash
+gh issue create --title "New Feature" --body-file SPEC.md
+```
+
+### Network Access
+Sometimes you want to allow network access for authentication flows (like GitHub OAuth). You can enable this with the `--host-network` flag:
 
 ```bash
 # Allow network access for authentication flows
 claudex --host-network
+```
+
+### Manage Sessions
+
+You can manage containers created by Claudex:
+
+```bash
+# List sessions (running by default)
+claudex list
+
+# List all, or only stopped
+claudex list --all
+claudex list --stopped
+
+# Destroy by name, by signature, or prune stopped
+claudex destroy --name my-api
+claudex destroy --signature <HASH>
+claudex destroy --prune-stopped
 ```
 
 ## Container Environment
@@ -113,9 +129,6 @@ Inside the Claudex container, you get a fully configured development environment
 ├── service1/          # Your mounted projects
 ├── service2/
 ├── .git/              # Auto-initialized Git repo
-└── instructions/      # Optional context files
-
-/context/              # Files added via --include
 ```
 
 ### Network Security
@@ -134,6 +147,7 @@ Every Claudex session automatically:
 - Commits initial state of all mounted files
 - Tracks all changes made by AI agents
 - Provides full audit trail of modifications
+- Not intended for anything other than local tracking of changes
 
 ## AI Integration with HomeStack
 
@@ -210,36 +224,3 @@ Claudex provides multiple layers of security:
 3. **File system limits** - only mounted directories are accessible
 4. **Audit trail** - Git tracks every change made
 5. **Ephemeral sessions** - containers are destroyed after use
-
-## Development Workflow
-
-A typical Claudex session looks like:
-
-```bash
-# Start secure AI development environment
-claudex ./my-project
-
-# Inside container - AI agents have access to:
-# - Project files (read/write)
-# - Development tools (git, npm, etc)
-# - AI APIs (through controlled network access)
-# - But NOT sensitive host system files
-
-# All changes are tracked in Git
-git log --oneline  # See what the AI agent modified
-
-# Commit and exit when done
-git commit -m "AI-assisted feature implementation"
-exit
-```
-
-## Why This Matters
-
-Claudex transforms AI-assisted development from a security risk into a secure, auditable process. It gives you the power of AI agents while maintaining:
-
-- **Control** over what systems agents can access
-- **Visibility** into what changes agents make
-- **Security** through multiple isolation layers
-- **Flexibility** to work with any AI provider or model
-
-This is essential infrastructure for safely incorporating AI agents into serious development workflows. You get the productivity benefits without compromising security.
