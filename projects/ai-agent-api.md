@@ -16,27 +16,32 @@ graph LR
         B["AI-Agent-Admin"]
     end
 
-    subgraph API["AI-Agent-API"]
+    subgraph AgentAPI["AI-Agent-API"]
         C["HTTP Handlers / Sessions / Conversations"]
         D["Session Store (MySQL)"]
         E["Agent Repo (MySQL)"]
-        F["LiteLLM Client"]
+        F["AI-API Client"]
+    end
+
+    subgraph AIAPI["AI-API (LiteLLM Reverse Proxy)"]
+        G["LiteLLM Router"]
     end
 
     subgraph Providers
-        G["OpenAI"]
-        H["Anthropic"]
-        I["Gemini + Others"]
+        H["OpenAI"]
+        I["Anthropic"]
+        J["Gemini + Others"]
     end
 
     A -->|Bearer master key| C
-    B -->|Proxy via /api/ai-agent| C
+    B -->|Proxy via /ai-agent| C
     C --> D
     C --> E
     C --> F
     F --> G
-    F --> H
-    F --> I
+    G --> H
+    G --> I
+    G --> J
     D --> C
     E --> C
 ```
