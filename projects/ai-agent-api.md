@@ -12,14 +12,14 @@ A Go service that sits in front of LiteLLM, stores every agent/session/message i
 ```mermaid
 flowchart LR
     subgraph Clients
-        A[Product UIs\n(Code Editor, Chat-GPT, etc.)]
+        A[Product UIs<br/>(Code Editor, Chat-GPT, etc.)]
         B[AI-Agent-Admin]
     end
 
     subgraph AI_Agent_API[AI-Agent-API]
-        C[HTTP Handlers\nSessions / Agents / Conversations]
-        D[Sessions Store\nMySQL]
-        E[Agents Repo\nMySQL]
+        C[HTTP Handlers<br/>Sessions / Agents / Conversations]
+        D[Sessions Store<br/>MySQL]
+        E[Agents Repo<br/>MySQL]
         F[LiteLLM Client]
     end
 
