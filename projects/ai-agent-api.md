@@ -6,7 +6,39 @@ A Go service that sits in front of LiteLLM, stores every agent/session/message i
 
 `mono/ai-agent-api` is the control plane for all of my AI-powered experiences. It defines agent behavior (prompt, model, tool schema, fallback order), tracks long-running conversations, persists every message/tool call, and proxies completions through LiteLLM with centralized authentication and cost controls. Products such as Code Editor, AI Agent Admin, and Chat-GPT talk to this service instead of hitting providers directly.
 
-![AI Agent API Diagram](https://www.nickhedberg.com/images/lk5BCDIikGZrClW1vf2bIVtsKtI=/fit-in/1200x1200/https://s3-us-west-2.amazonaws.com/nick-hedberg/img%2F1794%3A2172%2F0a4a038d73233d622e1c89c29034014544eb94af.png)
+![AI Agent API Diagram](https://www.nickhedberg.com/images/bkdKQAAYfAD317ce-FgX24BpTh4=/fit-in/1200x1200/https://s3-us-west-2.amazonaws.com/nick-hedberg/img%2F2014%3A2302%2Fb72a93f50f472cd07dfa9f501ce9eb00f6f8de7b.png)
+
+```mermaid
+flowchart LR
+    subgraph Clients
+        A[Product UIs\n(Code Editor, Chat-GPT, etc.)]
+        B[AI-Agent-Admin]
+    end
+
+    subgraph AI_Agent_API[AI-Agent-API]
+        C[HTTP Handlers\nSessions / Agents / Conversations]
+        D[Sessions Store\nMySQL]
+        E[Agents Repo\nMySQL]
+        F[LiteLLM Client]
+    end
+
+    subgraph Providers
+        G[(OpenAI)]
+        H[(Anthropic)]
+        I[(Gemini / Others)]
+    end
+
+    A -->|Bearer master key| C
+    B -->|Proxy via /api/ai-agent| C
+    C --> D
+    C --> E
+    C --> F
+    F --> G
+    F --> H
+    F --> I
+    D --> C
+    E --> C
+```
 
 ## Key Features
 
