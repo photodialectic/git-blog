@@ -110,4 +110,22 @@ Running user code safely requires:
 - **API Limitations**: Restricted access to sensitive browser APIs
 - **Resource Limits**: Prevention of infinite loops and memory exhaustion
 
-The combination of client-side bundling, AI assistance, and real-time preview creates a powerful development environment that runs entirely in the browser while maintaining near-native performance.
+## AI Agent Workspace
+
+- **Session-Oriented Chats**: Every `/code-editor/api/ai` request goes through `mono/ai-agent-api`, so prompts create LiteLLM-backed sessions with persistent conversation history, tool-call tracking, and streaming support.
+- **Tool Automation**: `useAIRequestService` inspects tool calls (read/write/replace/insert file helpers) and automatically feeds tool results back into the agent loop, letting the assistant diff CSS, refactor JS, or scaffold new files without copy/paste.
+- **Local Chat Persistence**: `AIPromptManager` stores the full transcript, selected agent key, and session id in `localStorage`, which means the assistant resumes exactly where you left it when reopening the editor.
+
+## Authenticated Workspaces & Token Budgets
+
+- **Auth0 Role Gate**: The main page (`mono/code-editor/pages/index.js`) requires the `nickhedberg.com:code-editor` claim before exposing the workspace or AI API routes.
+- **Token HUD**: A `TokenContext` fetches usage from `/code-editor/api/tokens`, rendering live token counts, estimated dollar cost, and a progress indicator so you know when you are nearing daily limits.
+- **Quota Enforcement**: Each completion records input/output tokens in MySQL via `addTokenCount`, and `/code-editor/api/ai` blocks prompts when a user exceeds their `token_max` allowance.
+
+## Persistent Projects & Sharing
+
+- **Source Library**: `/code-editor/api/sources` persists each playground’s HTML/CSS/JS blob plus metadata, enabling save, fork, and soft-delete flows against the `source` table.
+- **Router-Aware Loader**: `CodePlayground` watches the `[id]` query param, fetches the matching saved source, and hydrates the editors plus project name, making it easy to deep-link a specific demo.
+- **Responsive UI Controls**: The editor automatically flips into a two-tab (Editor/Preview) layout on small screens, keeping Monaco usable on tablets and phones while still driving the same bundler pipeline.
+
+The current stack combines client-side bundling, stateful AI assistance, and persistent projects to deliver a full browser-based development environment that feels surprisingly close to a local IDE.
