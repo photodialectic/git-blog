@@ -10,11 +10,6 @@ AI-Agent-Admin is the control room for my conversational stack. It authenticates
 
 ## Key Features
 
-### Auth & Navigation
-- **Role Gating**: `requireAgentSession` checks Auth0 for `nickhedberg.com:chat-gpt` roles before rendering any page.
-- **App Shell**: A persistent sidebar (Dashboard, Agents, Conversations, Sessions) sits alongside a responsive layout built with CSS modules.
-- **Session Awareness**: User info and logout shortcuts live in the sidebar footer, keeping the app aware of the current operator identity.
-
 ### Agent Management
 - **List View**: `/agents` fetches `GET /ai-agent-api/agents`, displays status badges, fallback warnings, and updated timestamps with `ClientDate`.
 - **Detail & Edit**: Dynamic routes (`/agents/[key]`) surface prompt text, tool definitions, unsupported model warnings, and offer edit/delete actions.
@@ -39,10 +34,3 @@ mono/ai-agent-admin/
 ├── lib/                           # Auth helpers, API client, env loader
 └── styles/                        # CSS modules for shared look/feel
 ```
-
-- **Proxy Layer**: The API route streams request bodies, preserves headers like `Accept: text/event-stream`, and forwards the caller’s method/path while attaching `Authorization: Bearer AI_AGENT_MK`.
-- **Server Components Ready**: Although built on the Pages Router, all data access happens server-side (`getServerSideProps`) to keep secrets off the client.
-- **Error UX**: Each page surfaces upstream HTTP status, raw error text, and actionable messaging (403 redirect to `/403`, 401 bounce to Auth0 login).
-- **Shared Utilities**: `lib/dateUtils.js` formats timestamps client-side; `lib/auth.js` centralizes login/logout URL construction so all links remain relative to the deployed base path.
-
-AI-Agent-Admin lets me govern dozens of agents and their traffic from a single pane of glass, bringing observability and safe mutation workflows to the whole platform.

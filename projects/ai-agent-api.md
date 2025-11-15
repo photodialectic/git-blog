@@ -1,4 +1,4 @@
-# [AI-Agent-API: Conversational Orchestrator](/ai-agent-api)
+# [AI-Agent-API: Conversational Orchestrator](/docs/oas/ai-agent-api.yml)
 
 A Go service that sits in front of LiteLLM, stores every agent/session/message in MySQL, and exposes an OpenAI-style API for any product that needs structured AI conversations with tool calling.
 
@@ -88,13 +88,3 @@ Each handler executes three layers:
 1. **Auth**: `handlers.RequireBearer` enforces the master key and short-circuits unauthorized calls.
 2. **Store Interaction**: Reads/writes against MySQL via repositories (`agents.SQLRepository`, `sessions.Store`).
 3. **LiteLLM Calls**: Builds `openai.ChatCompletionNewParams`, forwards them to LiteLLM, and persists resulting assistant/tool messages.
-
-## Implementation Details
-
-- **Pagination Helpers**: `internal/pagination` encodes created-at cursors so every list endpoint supports forward/backward paging without integer offsets.
-- **Temperature & Settings**: Sessions can override temperature or other knobs via the `settings` JSON blob; when absent, the agent's default temperature applies.
-- **Model Catalog**: A lightweight `/models` endpoint hits LiteLLM’s catalog to surface which model ids and providers are currently available.
-- **Conversation Integrity**: `sessions.Store.ensureConversation` creates a conversation id on demand but validates GUIDs when clients resume an existing one, returning `ErrConversationNotFound` or `ErrInvalidConversationID` to the handler.
-- **Graceful Degradation**: If LiteLLM returns an error, the handler unwraps it, maps rate limits vs upstream faults, and responds with structured JSON (`upstream_failure`, `not_found`, etc.) so clients can display actionable errors.
-
-AI-Agent-API gives me a single, enforceable contract for every agent I run, keeping traffic observable while still letting downstream apps build their own UX.
