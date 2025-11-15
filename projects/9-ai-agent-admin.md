@@ -6,6 +6,8 @@ A Next.js 15 application that gives operators a secure UI for managing agents, r
 
 AI-Agent-Admin is the control room for my conversational stack. It authenticates through Auth0, enforces role-based access, and proxies every request through the same host so the UI never exposes raw API keys. From here I can create/edit agents, audit tool calls, filter conversations by agent, and inspect session state without touching the database.
 
+![AI Agent Admin Screenshot](https://www.nickhedberg.com/images/3_HM_cDoS2kfNOFzX9pw5SaNP_w=/fit-in/1200x1200/https://s3-us-west-2.amazonaws.com/nick-hedberg/img%2F1856%3A2990%2Fd27ff5b7115fabfcbef77869ec25f768ba538c14.png)
+
 ## Key Features
 
 ### Auth & Navigation
