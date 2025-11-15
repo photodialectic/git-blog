@@ -10,23 +10,23 @@ A Go service that sits in front of LiteLLM, stores every agent/session/message i
 
 
 ```mermaid
-flowchart LR
+graph LR
     subgraph Clients
-        A[Product UIs<br/>(Code Editor, Chat-GPT, etc.)]
-        B[AI-Agent-Admin]
+        A["Product UIs (Code Editor, Chat-GPT, etc.)"]
+        B["AI-Agent-Admin"]
     end
 
-    subgraph AI_Agent_API[AI-Agent-API]
-        C[HTTP Handlers<br/>Sessions / Agents / Conversations]
-        D[Sessions Store<br/>MySQL]
-        E[Agents Repo<br/>MySQL]
-        F[LiteLLM Client]
+    subgraph API["AI-Agent-API"]
+        C["HTTP Handlers / Sessions / Conversations"]
+        D["Session Store (MySQL)"]
+        E["Agent Repo (MySQL)"]
+        F["LiteLLM Client"]
     end
 
     subgraph Providers
-        G[(OpenAI)]
-        H[(Anthropic)]
-        I[(Gemini / Others)]
+        G["OpenAI"]
+        H["Anthropic"]
+        I["Gemini + Others"]
     end
 
     A -->|Bearer master key| C
