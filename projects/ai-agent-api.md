@@ -8,6 +8,7 @@ A Go service that sits in front of LiteLLM, stores every agent/session/message i
 
 ![AI Agent API Diagram](https://www.nickhedberg.com/images/bkdKQAAYfAD317ce-FgX24BpTh4=/fit-in/1200x1200/https://s3-us-west-2.amazonaws.com/nick-hedberg/img%2F2014%3A2302%2Fb72a93f50f472cd07dfa9f501ce9eb00f6f8de7b.png)
 
+
 ```mermaid
 flowchart LR
     subgraph Clients
