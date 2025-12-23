@@ -7,7 +7,7 @@ A NextJS/React application that provides pixel-level Minecraft skin editing with
 
 Built for the Minecraft community (my kids and their friends), this skin editor allows users to create and modify Minecraft character skins with precision. The application demonstrates advanced canvas manipulation, 3D rendering, and real-time collaborative features within a web browser. It also includes an experimental collaboration mode for multiple users to edit the same skin simultaneously.
 
-![MC-Skins Screenshot](https://www.nickhedberg.com/images/HhJkUWxLOwVCTih2JxwqwDcfZPk=/fit-in/1200x1200/https://s3-us-west-2.amazonaws.com/nick-hedberg/img%2F1894%3A2856%2F33230e0ef02b834d7f7ae9c5c14f1e018417bedc.png)
+![MC-Skins Screenshot](https://www.nickhedberg.com/images/FRkl7V19xfc9IvyjKoO0G7RNP5Q=/fit-in/1200x1200/s3-us-west-2.amazonaws.com/nick-hedberg/img%2F1894%3A2856%2F33230e0ef02b834d7f7ae9c5c14f1e018417bedc.png)
 
 ## Key Features
 
