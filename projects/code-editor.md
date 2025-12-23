@@ -9,7 +9,7 @@ Inspired by tools like CodeSandbox and Replit, this project creates a self-hoste
 
 I originally built this to explore agentic tools that can write and patch code. It's limited to editing just three files: HTML, CSS, and JS.
 
-![Code Editor Screenshot](https://www.nickhedberg.com/images/_85ptp8TulTa5jFCOS7SW67I1qI=/fit-in/1200x1200/https://s3-us-west-2.amazonaws.com/nick-hedberg/img%2F2918%3A3006%2F4c2de7e989bbbfffddefb8e67e3ac12fad5421d6.png)
+![Code Editor Screenshot](https://www.nickhedberg.com/images/AA1zIvgui1wjoDWFjjvzZNVXAO8=/fit-in/1200x1200/s3-us-west-2.amazonaws.com/nick-hedberg/img%2F2918%3A3006%2F4c2de7e989bbbfffddefb8e67e3ac12fad5421d6.png)
 
 ## Key Features
 

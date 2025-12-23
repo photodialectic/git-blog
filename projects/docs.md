@@ -6,7 +6,7 @@ A NextJS service that provides comprehensive, interactive API documentation for 
 
 As my microservices architecture grew, maintaining accurate and accessible API documentation became crucial. This documentation platform centralizes all API specifications while providing interactive testing capabilities and seamless integration with development workflows.
 
-![Docs Screenshot](https://www.nickhedberg.com/images/D0FOu3DW7-dgTP9ht4yP7NH471g=/fit-in/1200x1200/https://s3-us-west-2.amazonaws.com/nick-hedberg/img%2F1888%3A2850%2F9cba7af0baa83d2518b3374de4a2150c08668434.png)
+![Docs Screenshot](https://www.nickhedberg.com/images/ewjy_BoPi3NiIVOB_xD6EU8gaWc=/fit-in/1200x1200/s3-us-west-2.amazonaws.com/nick-hedberg/img%2F1888%3A2850%2F9cba7af0baa83d2518b3374de4a2150c08668434.png)
 
 ## Key Features
 

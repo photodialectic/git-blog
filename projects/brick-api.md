@@ -9,7 +9,7 @@ Built for LEGO enthusiasts and collectors, this API service demonstrates how to 
 
 The main idea is to provide a simple UI for rebuilding LEGO sets by looking up their inventory by set number.
 
-![Brick-API Screenshot](https://www.nickhedberg.com/images/GuvAsOZe6mR2kqkKFUW_nT7AoWU=/fit-in/1200x1200/https://s3-us-west-2.amazonaws.com/nick-hedberg/img%2F1824%3A2858%2F090a3e20ad74ac12efa4a0289084a944f3f564ac.png)
+![Brick-API Screenshot](https://www.nickhedberg.com/images/NiU7pYDb0cfdw2jPjtDsifRcwb0=/fit-in/1200x1200/s3-us-west-2.amazonaws.com/nick-hedberg/img%2F1824%3A2858%2F090a3e20ad74ac12efa4a0289084a944f3f564ac.png)
 
 ## Implementation
 

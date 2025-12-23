@@ -6,7 +6,7 @@ A browser-based pipeline builder that lets me chain together regex filters, JSON
 
 `mono/tools/src/pages/pipeline/[[...id]].js` renders the IO Pipes experience: a responsive layout with themed UI, Auth0 user controls, and three columns—Input, Pipeline, Available Transformers. Everything runs client-side, but pipelines can be persisted through API routes backed by MySQL, which makes it easy to share a link or revisit a previous flow.
 
-![IO Pipes Screenshot](https://www.nickhedberg.com/images/x2tKDKHY6_WPTC-jaVU00Pd6btg=/fit-in/1200x1200/https://s3-us-west-2.amazonaws.com/nick-hedberg/img%2F2852%3A2552%2F5172712d347c22a21047295bda7d0e1a69e99760.png)
+![IO Pipes Screenshot](https://www.nickhedberg.com/images/bStC5fYsMP6TeYDK8hG_U0kaUmU=/fit-in/1200x1200/s3-us-west-2.amazonaws.com/nick-hedberg/img%2F2852%3A2552%2F5172712d347c22a21047295bda7d0e1a69e99760.png)
 
 ## Key Features
 

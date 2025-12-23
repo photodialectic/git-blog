@@ -9,7 +9,7 @@ I built this so my kids could save up for a Switch 2 by performing chores/tasks 
 
 The main idea is that kids submit chores for approval, which helps develop skills like accountability and understanding the value of their work. It deliberately does not allow parents to assign chores or reward points directly. Kids decide which chores they want to do and submit them for approval, helping them learn to manage their own responsibilities.
 
-![Chores Screenshot](https://www.nickhedberg.com/images/ix6FsurDeR0LCmCRznb_VYvl748=/fit-in/1200x1200/https://s3-us-west-2.amazonaws.com/nick-hedberg/img%2F880%3A2324%2Fcd88700bbfe940ae69ca0bd96b9221723d5b5cfe.png)
+![Chores Screenshot](https://www.nickhedberg.com/images/60Qmvjfy353iZ2sLGG90rrA1TPA=/fit-in/1200x1200/s3-us-west-2.amazonaws.com/nick-hedberg/img%2F880%3A2324%2Fcd88700bbfe940ae69ca0bd96b9221723d5b5cfe.png)
 
 ## Key Features
 
