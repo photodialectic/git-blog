@@ -1,10 +1,13 @@
-# AI-API: Self-Hosted LiteLLM Reverse Proxy
+# AI-API: Self-Hosted Bifrost Gateway
 
-Managing multiple AI provider APIs (OpenAI, Anthropic, Google) across different services becomes unwieldy quickly. Each service needs its own API keys, rate limiting, and provider-specific code. My solution: a unified AI-API using LiteLLM as a reverse proxy.
+Managing multiple AI provider APIs (OpenAI, Anthropic, Google) across different services becomes unwieldy quickly. I'm a big fan of finding a unified gateway solution. I started with LiteLLM Reverse Proxy and switched to Bifrost. I switched for a few reanson but the main 2 are:
 
-## Why LiteLLM?
+1. Smaller Memory Footprint: LiteLLM's reverse proxy has a large 500->1000MB memory footprint which can be burdensome for my homestack which is trying to run on a single host with low costs
+2. Less Configuration: I'm not using many governance features and rate managment, but Bifrost has a much more pass through configuration which meant less time from me configuring and managing model aliases. Theres probably a better approach to LiteLLM but no. 1 was the main reason for the switch.
 
-[LiteLLM](https://docs.litellm.ai/) translates requests between different AI provider APIs, presenting a unified OpenAI-compatible interface. This means:
+## Why Bifrost?
+
+[Bifrost](https://docs.getbifrost.ai/overview) translates requests between different AI provider APIs, presenting a unified OpenAI-compatible interface. This means:
 
 - **Single integration point** - all services use the same API format
 - **Provider abstraction** - switch between models without changing application code
@@ -15,54 +18,74 @@ Managing multiple AI provider APIs (OpenAI, Anthropic, Google) across different 
 
 My AI-API runs as a Docker container in the HomeStack with this LiteLLM configuration:
 
-```yaml
-model_list:
-  # OpenAI Models
-  - model_name: gpt-4o-mini
-    litellm_params:
-      model: openai/gpt-4o-mini
-      api_key: os.environ/OPENAI_API_KEY
-
-  - model_name: gpt-3.5
-    litellm_params:
-      model: openai/gpt-3.5-turbo
-      api_key: os.environ/OPENAI_API_KEY
-
-  # Anthropic Models
-  - model_name: claude-4
-    litellm_params:
-      model: anthropic/claude-sonnet-4-20250514
-      api_key: os.environ/ANTHROPIC_API_KEY
-
-  - model_name: claude-3-5-sonnet
-    litellm_params:
-      model: anthropic/claude-3-5-sonnet-20241022
-      api_key: os.environ/ANTHROPIC_API_KEY
-
-  - model_name: claude-3-5-haiku
-    litellm_params:
-      model: anthropic/claude-3-5-haiku-20241022
-      api_key: os.environ/ANTHROPIC_API_KEY
-
-  # Google Models
-  - model_name: gemini-2.0-flash
-    litellm_params:
-      model: gemini/gemini-2.0-flash
-      api_key: os.environ/GEMINI_API_KEY
-
-  # Image Generation
-  - model_name: dalle3
-    litellm_params:
-      model: openai/dall-e-3
-      api_key: os.environ/OPENAI_API_KEY
-
-general_settings:
-  master_key: os.environ/AI_API_MK
-  disable_spend_logs: True
-  disable_error_logs: True
-
-litellm_settings:
-  log_raw_request_response: False
+```javascript
+{
+  "$schema": "https://www.getbifrost.ai/schema",
+  "providers": {
+    "openai": {
+      "keys": [
+        { "name": "openai-primary", "value": "env.OPENAI_API_KEY", "weight": 1 },
+      ]
+    },
+    "anthropic": {
+      "keys": [
+        { "name": "anthropic-primary", "value": "env.ANTHROPIC_API_KEY", "weight": 1 }
+      ]
+    },
+    "gemini": {
+      "keys": [
+        { "name": "gemini-primary", "value": "env.GEMINI_API_KEY", "weight": 1 }
+      ]
+    },
+    "vertex": {
+      "keys": [
+        {
+          "name": "vertex-primary",
+          "weight": 1,
+          "vertex_key_config": {
+            "project_id": "vertex-487414",
+            "region": "global",
+            "auth_credentials": "env.VERTEX_CREDENTIALS_JSON"
+          }
+        }
+      ]
+    }
+  },
+  "governance": {
+    "virtual_keys": [
+      {
+        "id": "vk-master",
+        "name": "master",
+        "value": "env.AI_API_MK",
+        "is_active": true,
+        "provider_configs": [
+          { "provider": "openai" },
+          { "provider": "anthropic" },
+          { "provider": "gemini" },
+          { "provider": "vertex" }
+        ]
+      }
+    ]
+  },
+  "auth_config": {
+    "admin_username": "env.AI_API_ADMIN_USER",
+    "admin_password": "env.AI_API_ADMIN_PASS",
+    "is_enabled": true,
+    "disable_auth_on_inference": true
+  },
+  "client": {
+    "enforce_governance_header": true,
+    "enforce_auth_on_inference": true,
+    "enable_litellm_fallback": true
+  },
+  "config_store": {
+    "enabled": true,
+    "type": "sqlite",
+    "config": {
+      "path": "/app/db/bifrost.db"
+    }
+  }
+}
 ```
 
 ## Docker Integration
@@ -71,29 +94,41 @@ The AI-API service integrates seamlessly into my Docker Compose stack:
 
 ```yaml
 ai-api:
-  container_name: ai-api
-  image: ghcr.io/berriai/litellm:main-latest
-  environment:
-    - OPENAI_API_KEY=${OPENAI_API_TOKEN}
-    - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-    - GEMINI_API_KEY=${GEMINI_API_KEY}
-    - AI_API_MK=${AI_API_MK}
-    - SERVER_ROOT_PATH=/ai-api
-  labels:
-    - traefik.enable=true
-    - traefik.http.services.ai-api.loadbalancer.server.port=10200
-    - traefik.http.routers.ai-api.rule=Host(`www.nickhedberg.com`) && PathPrefix(`/ai-api`)
-    - traefik.http.routers.ai-api.entrypoints=websecure
-    - traefik.http.routers.ai-api.tls.certresolver=wwwresolver
-  ports:
-    - 10200:10200
-  volumes:
-    - ./ai-api/config.yml:/app/config.yml
+    container_name: ai-api
+    environment:
+        - OPENAI_API_KEY=${OPENAI_API_KEY}
+        - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+        - OPENAI_API_KEY_BF=${OPENAI_API_KEY_BF}
+        - ANTHROPIC_API_KEY_BF=${ANTHROPIC_API_KEY_BF}
+        - AI_API_MK=${AI_API_MK}
+        - GEMINI_API_KEY=${GEMINI_API_KEY}
+        - GOOGLE_APPLICATION_CREDENTIALS=${VERTEX_CREDENTIALS_JSON}
+        - VERTEX_CREDENTIALS_JSON=${VERTEX_CREDENTIALS_JSON}
+        - AI_API_ADMIN_USER=${AI_API_ADMIN_USER}
+        - AI_API_ADMIN_PASS=${AI_API_ADMIN_PASS}
+        - APP_PORT=10200
+    image: maximhq/bifrost:latest
+    labels:
+        - traefik.enable=true
+        - traefik.http.services.ai-api.loadbalancer.server.port=10200
+        - traefik.http.routers.ai-api.middlewares=ai-api-stripprefix
+        - traefik.http.middlewares.ai-api-stripprefix.stripprefix.prefixes=/ai-api
+    ports:
+        - 10200:10200
+    profiles:
+        - site
+        - dev
+        - prod
+        - stage
+    restart: unless-stopped
+    volumes:
+        - ./ai-api/config.json:/app/data/config.json:ro
+        - ./ai-api/db:/app/db
 ```
 
 Key configuration details:
 
-- **Path-based routing** - accessible at `www.nickhedberg.com/ai-api`
+- **Path-based routing** - accessible at `www.nickhedberg.com/ai-api/v1`
 - **Environment variables** - provider API keys loaded from encrypted secrets
 - **Volume mount** - configuration file mounted into container
 - **Master key authentication** - single key controls access to all models
@@ -106,7 +141,7 @@ Services can now use any AI model through a single endpoint:
 
 ```javascript
 const response = await fetch(
-  "https://www.nickhedberg.com/ai-api/chat/completions",
+  "https://www.nickhedberg.com/ai-api/v1/chat/completions",
   {
     method: "POST",
     headers: {
@@ -114,7 +149,7 @@ const response = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: "claude-4",
+      model: "anthropic/claude-4-5-sonnet",
       messages: [{ role: "user", content: "Explain containerization" }],
     }),
   },
@@ -125,11 +160,11 @@ const response = await fetch(
 
 ```javascript
 // Switch providers without changing code
-const models = ["gpt-4o-mini", "claude-3-5-sonnet", "gemini-2.0-flash"];
+const models = ["openai/gpt-4o-mini", "anthropic/claude-3-5-sonnet", "vertex/gemini-2.0-flash"];
 const model = models[Math.floor(Math.random() * models.length)];
 
 const response = await fetch(
-  "https://www.nickhedberg.com/ai-api/chat/completions",
+  "https://www.nickhedberg.com/ai-api/v1/chat/completions",
   {
     // ... same headers and structure
     body: JSON.stringify({
@@ -139,15 +174,3 @@ const response = await fetch(
   },
 );
 ```
-
-## Benefits in Practice
-
-This setup has transformed how I integrate AI across HomeStack services:
-
-1. **Simplified integration** - every service uses the same API contract
-2. **Centralized cost tracking** - all AI spend flows through one endpoint
-3. **Easy model experimentation** - switch models by changing a string
-4. **Provider redundancy** - if one provider is down, switch to another
-5. **Security** - provider API keys stored in one secure location
-
-The AI-API acts as the unified brain of my HomeStack, making AI capabilities easily accessible to any service that needs them. It's the foundation that makes sophisticated AI integration practical at the HomeStack scale.

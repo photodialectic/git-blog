@@ -9,7 +9,7 @@ I built this application in the summer of 2023 to explore OpenAI's API and exper
 
 I continue to add features such as tool calling; model switching backed by my self-hosted LiteLLM reverse proxy and AI-API service; vision support; code formatting; and copy buttons.
 
-![Chat-GPT Screenshot](https://www.nickhedberg.com/images/l6JWGrRQwmAkVpTpn6VS5V2S64E=/fit-in/1200x1200/s3-us-west-2.amazonaws.com/nick-hedberg/img%2F1278%3A2744%2Fc9f043a54aa6bf954c15984b9ffe9a27a368a7d4.png)
+![Chat-GPT Screenshot](https://www.nickhedberg.com/images/7Ye6gZbvZkQQxMgSnXmR7dP0XM8=/fit-in/1200x1200/nhdc.nyc3.cdn.digitaloceanspaces.com/img%2F1528%3A1860%2F9858fa6afca87d1fbd486e6074e85240eae1f547.png)
 
 ## Key Features
 
