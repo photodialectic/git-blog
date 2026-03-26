@@ -1,9 +1,9 @@
 # AI-API: Self-Hosted Bifrost Gateway
 
-Managing multiple AI provider APIs (OpenAI, Anthropic, Google) across different services becomes unwieldy quickly. I'm a big fan of finding a unified gateway solution. I started with LiteLLM Reverse Proxy and switched to Bifrost. I switched for a few reanson but the main 2 are:
+Managing multiple AI provider APIs (OpenAI, Anthropic, Google) across different services becomes unwieldy quickly. I prefer a unified gateway approach. I started with the LiteLLM reverse proxy and later switched to Bifrost for two main reasons:
 
-1. Smaller Memory Footprint: LiteLLM's reverse proxy has a large 500->1000MB memory footprint which can be burdensome for my homestack which is trying to run on a single host with low costs
-2. Less Configuration: I'm not using many governance features and rate managment, but Bifrost has a much more pass through configuration which meant less time from me configuring and managing model aliases. Theres probably a better approach to LiteLLM but no. 1 was the main reason for the switch.
+1. Smaller memory footprint: LiteLLM's reverse proxy consumed roughly 500-1000 MB in my setup, which is significant for a single low-cost host.
+2. Less configuration overhead: I am not using advanced governance/rate-management features, and Bifrost's pass-through model configuration reduced alias and routing management for my use case.
 
 ## Why Bifrost?
 
@@ -16,7 +16,7 @@ Managing multiple AI provider APIs (OpenAI, Anthropic, Google) across different 
 
 ## Configuration
 
-My AI-API runs as a Docker container in the HomeStack with this LiteLLM configuration:
+My AI-API runs as a Docker container in the HomeStack with this Bifrost configuration:
 
 ```javascript
 {

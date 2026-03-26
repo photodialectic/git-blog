@@ -24,10 +24,9 @@ After building the web-based [/chat-gpt](/chat-gpt) application, I wanted a term
 - **Multi-line Composition**: Dedicated compose mode for longer messages with `/compose`
 
 ### Configuration System
-- **JSON Configuration**: Simple JSON-based config stored in `~/.config/chat-tui/config.json`
-- **Token Management**: Secure token storage with Auth0 integration
-- **Environment Variables**: Optional environment-based configuration override
-- **Docker Support**: Containerized deployment with volume mounting for persistence
+- **JSON Configuration**: Config is stored in `~/.config/chat-tui/config.json` (or `/data/config.json` in Docker).
+- **Token Management**: Access token is copied from the Auth flow and persisted in config.
+- **Docker Support**: Containerized deployment with volume mounting for persistent state.
 
 ## Technical Implementation
 

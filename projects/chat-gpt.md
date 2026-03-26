@@ -7,7 +7,7 @@ A NextJS/React web application that provides a clean interface for AI conversati
 
 I built this application in the summer of 2023 to explore OpenAI's API and experiment with AI APIs in general. I use it daily as an alternative to ChatGPT for quick questions and brainstorming.
 
-I continue to add features such as tool calling; model switching backed by my self-hosted LiteLLM reverse proxy and AI-API service; vision support; code formatting; and copy buttons.
+I continue to add features such as tool calling; model switching backed by my self-hosted AI-API gateway; vision support; code formatting; and copy buttons.
 
 ![Chat-GPT Screenshot](https://www.nickhedberg.com/images/7Ye6gZbvZkQQxMgSnXmR7dP0XM8=/fit-in/1200x1200/nhdc.nyc3.cdn.digitaloceanspaces.com/img%2F1528%3A1860%2F9858fa6afca87d1fbd486e6074e85240eae1f547.png)
 
@@ -36,7 +36,7 @@ I continue to add features such as tool calling; model switching backed by my se
   - `useStoredConvos`: Local storage integration
 
 ### Backend Integration
-- **AI-API Connection**: Interfaces with my self-hosted LiteLLM reverse proxy
+- **AI-API Connection**: Interfaces with my self-hosted AI gateway
 - **Database Layer**: MySQL for chat persistence and user data
 - **Authentication**: Auth0 SDK for secure user sessions
 

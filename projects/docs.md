@@ -86,15 +86,10 @@ The platform supports both Redoc and Swagger UI:
 ```javascript
 // Live API testing through proxy
 export default async function handler(req, res) {
-  const { service, endpoint } = req.query;
-  const apiUrl = getServiceUrl(service) + endpoint;
-  
-  const response = await fetch(apiUrl, {
-    method: req.method,
-    headers: req.headers,
-    body: req.method !== 'GET' ? JSON.stringify(req.body) : undefined
-  });
-  
-  return res.status(response.status).json(await response.json());
+  const targetUrl = req.headers["x-target-url"];
+  if (!targetUrl) {
+    return res.status(400).json({ error: "Target URL is required" });
+  }
+  // http-proxy-middleware forwards to targetUrl with CORS handling
 }
 ```

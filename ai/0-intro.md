@@ -19,9 +19,9 @@ This architecture provides several key benefits:
 
 ## Posts
 
-[1. AI-API: Self-Hosted LiteLLM Reverse Proxy](/blog/ai/1-ai-api.md)
+[1. AI-API: Self-Hosted Bifrost Gateway](/blog/ai/1-ai-api.md)
 
-How I unified multiple AI providers (OpenAI, Anthropic, Google) behind a single API endpoint using LiteLLM, with centralized authentication and cost tracking.
+How I unified multiple AI providers (OpenAI, Anthropic, Google) behind a single API endpoint using Bifrost, with centralized authentication and cost tracking.
 
 [2. Claudex: Secure Containerized AI Development](/blog/ai/2-claudex.md)
 
