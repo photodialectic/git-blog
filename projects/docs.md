@@ -77,6 +77,7 @@ export default function handler(req, res) {
 
 ### Interactive Documentation
 The platform supports both Redoc and Swagger UI:
+
 - **Responsive Design**: Mobile-friendly documentation interfaces
 - **Syntax Highlighting**: Code examples with proper syntax coloring
 - **Deep Linking**: Direct links to endpoints and operations

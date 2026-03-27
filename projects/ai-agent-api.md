@@ -85,6 +85,7 @@ mux.Handle("POST /ai-agent-api/sessions/{id}/messages",
 ```
 
 Each handler executes three layers:
+
 1. **Auth**: `handlers.RequireBearer` enforces the master key and short-circuits unauthorized calls.
 2. **Store Interaction**: Reads/writes against MySQL via repositories (`agents.SQLRepository`, `sessions.Store`).
 3. **Upstream AI Calls**: Builds `openai.ChatCompletionNewParams`, forwards them to the configured AI gateway, and persists resulting assistant/tool messages.

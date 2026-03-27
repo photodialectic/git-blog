@@ -67,6 +67,7 @@ ui/               # Bubble Tea interface components
 ## Development Experience
 
 Building this project provided insights into:
+
 - **Terminal UI Design**: Creating intuitive interfaces within terminal constraints
 - **Go Concurrency**: Managing streaming responses and UI updates concurrently
 - **State Management**: Balancing local persistence with real-time data
@@ -86,6 +87,7 @@ Building this project provided insights into:
 ## Docker Deployment
 
 The application is fully containerized with sensible defaults:
+
 - Color support enabled automatically
 - Volume mounting for persistent state
 - Host network access for API connectivity
@@ -94,6 +96,7 @@ The application is fully containerized with sensible defaults:
 ## Use Cases
 
 Chat-TUI excels in scenarios where:
+
 - **Server Administration**: Quick AI assistance while working on remote systems
 - **Development Workflow**: Integrated AI help without leaving the terminal
 - **Resource Efficiency**: Lightweight alternative to web interfaces

@@ -17,25 +17,23 @@ As AI capabilities became central to my HomeStack projects, managing multiple AP
 ## Technical Architecture
 
 ### Bifrost Integration
-```yaml
-# Core configuration shape (mono/ai-api/config.json)
-providers:
-  openai:
-    keys:
-      - name: openai-primary
-        value: env.OPENAI_API_KEY
-  anthropic:
-    keys:
-      - name: anthropic-primary
-        value: env.ANTHROPIC_API_KEY
-  gemini:
-    keys:
-      - name: gemini-primary
-        value: env.GEMINI_API_KEY
-governance:
-  virtual_keys:
-    - name: master
-      value: env.AI_API_MK
+```json
+{
+  "providers": {
+    "openai": {
+      "keys": [{ "name": "openai-primary", "value": "env.OPENAI_API_KEY" }]
+    },
+    "anthropic": {
+      "keys": [{ "name": "anthropic-primary", "value": "env.ANTHROPIC_API_KEY" }]
+    },
+    "gemini": {
+      "keys": [{ "name": "gemini-primary", "value": "env.GEMINI_API_KEY" }]
+    }
+  },
+  "governance": {
+    "virtual_keys": [{ "name": "master", "value": "env.AI_API_MK" }]
+  }
+}
 ```
 
 ## Integration Benefits

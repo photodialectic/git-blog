@@ -7,7 +7,7 @@ A Next.js/React application for pixel-level Minecraft skin editing with real-tim
 
 Built for the Minecraft community (my kids and their friends), this editor allows users to create and modify Minecraft character skins directly in the browser. It combines a canvas-based paint interface with a live 3D viewer, and includes an experimental collaboration mode over WebSockets.
 
-![MC-Skins Screenshot](https://www.nickhedberg.com/images/FRkl7V19xfc9IvyjKoO0G7RNP5Q=/fit-in/1200x1200/s3-us-west-2.amazonaws.com/nick-hedberg/img%2F1894%3A2856%2F33230e0ef02b834d7f7ae9c5c14f1e018417bedc.png)
+![MC-Skins Screenshot](https://www.nickhedberg.com/images/4VpLCoveo1GRbsaJOFQPgAeC1co=/fit-in/1200x1200/nhdc.nyc3.cdn.digitaloceanspaces.com/img%2F1674%3A3024%2F5c557cc66d71beb1dfc4fe764e4db3b4a8f1d502.png)
 
 ## Key Features
 
@@ -45,6 +45,7 @@ components/EditControls/     # Upload/export/history/area controls
 
 ### Pixel Manipulation System
 The editor uses a layered canvas approach:
+
 - **Base Layer**: Primary skin pixels (Steve/Alex model support)
 - **Overlay Layer**: Additional details like jackets, hats, sleeves
 - **Preview Integration**: Real-time texture mapping to 3D model
@@ -70,6 +71,7 @@ const skinRenderer = {
 
 ### Pixel-Perfect Editing
 Minecraft skins require precise pixel placement:
+
 - **Zoom Controls**: Multiple zoom levels for detailed work
 - **Grid Overlay**: Optional pixel grid for alignment
 - **Touch Support**: Mobile-friendly editing with touch gestures
@@ -77,6 +79,7 @@ Minecraft skins require precise pixel placement:
 
 ### 3D Model Accuracy
 Ensuring the preview matches in-game appearance:
+
 - **Minecraft Geometry**: Accurate replication of character model dimensions
 - **Texture Mapping**: Proper UV mapping for all model faces
 - **Lighting Model**: Realistic lighting that matches game environment
@@ -96,6 +99,7 @@ Ensuring the preview matches in-game appearance:
 
 ### Responsive Design
 The editor adapts to different screen sizes:
+
 - **Desktop**: Full multi-panel layout with all tools visible
 - **Tablet**: Collapsible panels with touch-optimized controls
 - **Mobile**: Stacked layout with swipe navigation between editor and preview
