@@ -5,7 +5,7 @@ Some time ago, I became interested in the concept of using [git](https://en.wiki
 ## Tech stack
 
 - [Python](https://www.python.org/)
-- [Torando](https://www.tornadoweb.org/en/stable/)
+- [Tornado](https://www.tornadoweb.org/en/stable/)
 - [Pygit2](https://www.pygit2.org/)
 
 Python is the language I feel most comfortable with and Tornado is a web framework that I have used in the past. Pygit2 is a Python binding for libgit2, which is a C implementation of git.
@@ -38,15 +38,15 @@ CMD ["python", "/app/service.py"]
 
 ## API Design
 
-I wanted to keep the API straightfoward so there are really just a few [endpoints](https://www.nickhedberg.com/docs/oas/blog-api.yml)
+I wanted to keep the API straightforward, so there are just a few [endpoints](https://www.nickhedberg.com/docs/oas/blog-api.yml)
 
 - `GET /v1/branches` - List all branches
 - `GET /v1/entries` - List all entries (essentially the file system)
-- `GET /v1/entries/:path` - The path could resolve to either a tree or blob. If its a blob it'll render the contents
+- `GET /v1/entries/:path` - The path can resolve to either a tree or a blob. If it's a blob, the API renders its contents.
 
 ### API Utils
 
-I'm used to the idea of just `git checkout <branch>` and then `git pull`. I didn't find this to be as straightfoward with pygit2. So I had to write some utility functions to help me with this.
+I'm used to the flow of `git checkout <branch>` and then `git pull`. I didn't find this to be as straightforward with pygit2, so I wrote utility functions to handle it cleanly.
 
 #### `get_repo`
 

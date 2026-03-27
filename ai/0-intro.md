@@ -8,21 +8,20 @@ This series covers how I've integrated AI capabilities into my service-oriented 
 
 My AI setup consists of two main components:
 
-1. **AI-API**: A self-hosted LiteLLM reverse proxy that unifies multiple AI providers behind a single endpoint
-2. **Claudex**: A secure, containerized development environment for AI agents
+1. **AI-API**: A self-hosted Bifrost Gateway that acts as a reverse proxy for multiple AI providers, including OpenAI, Anthropic, and Google. It provides a single API endpoint for all AI interactions, with centralized authentication and cost tracking.
+2. **Claudex**: A secure, containerized development environment for CLI AI agents.
 
 This architecture provides several key benefits:
 
 - **Single API endpoint** for all AI providers (OpenAI, Anthropic, Google)
-- **Unified authentication** using master keys instead of individual provider keys
-- **Cost tracking and rate limiting** across all AI usage
+- **Unified authentication** using virtual master keys instead of individual provider keys
 - **Secure development environment** for AI agent experimentation
 
 ## Posts
 
-[1. AI-API: Self-Hosted LiteLLM Reverse Proxy](/blog/ai/1-ai-api.md)
+[1. AI-API: Self-Hosted Bifrost Gateway](/blog/ai/1-ai-api.md)
 
-How I unified multiple AI providers (OpenAI, Anthropic, Google) behind a single API endpoint using LiteLLM, with centralized authentication and cost tracking.
+How I unified multiple AI providers (OpenAI, Anthropic, Google) behind a single API endpoint using Bifrost, with centralized authentication and cost tracking.
 
 [2. Claudex: Secure Containerized AI Development](/blog/ai/2-claudex.md)
 

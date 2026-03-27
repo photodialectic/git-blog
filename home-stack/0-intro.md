@@ -8,7 +8,7 @@ HomeStack is what I refer to as the tech stack I use for my side projects. I thi
 
 Before embracing SOA, I used to host each site or service on a subdomain of my main domain. For example, my web-utils service was on utils.nickhedberg.com. However, with my current HomeStack, everything is on a single domain and the services are differentiated by path using a central router.
 
-In this series, I will write about how I have implemented various infrastructure components in my homestack.
+In this series, I will write about how I have implemented various infrastructure components in my HomeStack.
 
 ## Posts
 
@@ -26,7 +26,7 @@ I use the free version of [Auth0](https://auth0.com/) for authentication, along 
 
 [4. MySQL](/blog/home-stack/4-mysql.md)
 
-I don't utilize a managed MySQL service; rather, it is another container running on my server. A key unlock for me was managing schema changes, which I use [Skeema](https://www.skeema.io/) for.
+I don't use a managed MySQL service; instead, it is another container running on my server. A key unlock for me was managing schema changes with [Skeema](https://www.skeema.io/).
 
 [5. Development and Utilities](/blog/home-stack/5-development-and-utilities.md)
 

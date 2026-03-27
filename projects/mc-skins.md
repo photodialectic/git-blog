@@ -1,22 +1,22 @@
 
 # [MC-Skins: Minecraft Skin Editor](/mc-skins)
 
-A NextJS/React application that provides pixel-level Minecraft skin editing with real-time 3D preview and community sharing features.
+A Next.js/React application for pixel-level Minecraft skin editing with real-time 3D preview and optional live collaboration.
 
 ## Overview
 
-Built for the Minecraft community (my kids and their friends), this skin editor allows users to create and modify Minecraft character skins with precision. The application demonstrates advanced canvas manipulation, 3D rendering, and real-time collaborative features within a web browser. It also includes an experimental collaboration mode for multiple users to edit the same skin simultaneously.
+Built for the Minecraft community (my kids and their friends), this editor allows users to create and modify Minecraft character skins directly in the browser. It combines a canvas-based paint interface with a live 3D viewer, and includes an experimental collaboration mode over WebSockets.
 
-![MC-Skins Screenshot](https://www.nickhedberg.com/images/FRkl7V19xfc9IvyjKoO0G7RNP5Q=/fit-in/1200x1200/s3-us-west-2.amazonaws.com/nick-hedberg/img%2F1894%3A2856%2F33230e0ef02b834d7f7ae9c5c14f1e018417bedc.png)
+![MC-Skins Screenshot](https://www.nickhedberg.com/images/4VpLCoveo1GRbsaJOFQPgAeC1co=/fit-in/1200x1200/nhdc.nyc3.cdn.digitaloceanspaces.com/img%2F1674%3A3024%2F5c557cc66d71beb1dfc4fe764e4db3b4a8f1d502.png)
 
 ## Key Features
 
 ### Pixel Art Editor
 - **Canvas-Based Editing**: Precise pixel-level control using HTML5 Canvas
-- **Layer Management**: Separate base and overlay layers for complex skin designs
-- **Color Palette**: Custom color picker with Minecraft-appropriate color suggestions
-- **Drawing Tools**: Brush, pencil, fill bucket, and eyedropper tools
-- **Undo/Redo System**: Full edit history with keyboard shortcuts
+- **Area Isolation**: Focus on specific body regions (head/arms/torso/legs and sides) while editing
+- **Color Controls**: Palette + picker workflow for fast color changes
+- **Quick Fill**: Fill grouped regions in one action
+- **Undo/Redo History**: Local history stack for stepping backward/forward through edits
 
 ### 3D Preview System
 - **Real-Time Rendering**: Live 3D character model updates as you edit
@@ -26,27 +26,26 @@ Built for the Minecraft community (my kids and their friends), this skin editor 
 
 ### Skin Management
 - **Save & Load**: Persistent skin storage with user accounts
-- **Import/Export**: Support for standard Minecraft skin file formats (.png)
-- **Template Library**: Pre-built templates and base skins to start from
-- **Version History**: Track changes and revert to previous versions
+- **Import/Export**: PNG upload and export support (64x64 validation on upload)
+- **Per-User Library**: APIs scoped to the authenticated user for listing/creating/updating skins
 
 ## Technical Implementation
 
 ### Canvas Architecture
 ```
 components/PixelPainter/
-└── index.js              # Main canvas editor with tool system
+└── index.js                 # Main canvas editor and paint interactions
 
 components/Preview/
-└── index.js              # 3D model rendering and animation
+└── index.js                 # 3D viewer integration (react-skinview3d)
 
-utils/
-├── skinData.js           # Skin format conversion utilities
-└── rendering.js          # 3D model geometry and texturing
+hooks/useSkinData.js         # Shared skin state, history, persistence, ws sync
+components/EditControls/     # Upload/export/history/area controls
 ```
 
 ### Pixel Manipulation System
 The editor uses a layered canvas approach:
+
 - **Base Layer**: Primary skin pixels (Steve/Alex model support)
 - **Overlay Layer**: Additional details like jackets, hats, sleeves
 - **Preview Integration**: Real-time texture mapping to 3D model
@@ -65,14 +64,14 @@ const skinRenderer = {
 
 ### Authentication & Storage
 - **User Accounts**: Auth0 integration for personal skin libraries
-- **Database Storage**: MySQL backend for skin metadata and sharing
-- **File Management**: Secure skin file upload and retrieval
-- **Community Features**: Public gallery and skin sharing system
+- **Database Storage**: MySQL backend for skin metadata and pixel data
+- **Secure APIs**: CRUD routes validate user ownership before updates/deletes
 
 ## Development Challenges
 
 ### Pixel-Perfect Editing
 Minecraft skins require precise pixel placement:
+
 - **Zoom Controls**: Multiple zoom levels for detailed work
 - **Grid Overlay**: Optional pixel grid for alignment
 - **Touch Support**: Mobile-friendly editing with touch gestures
@@ -80,17 +79,15 @@ Minecraft skins require precise pixel placement:
 
 ### 3D Model Accuracy
 Ensuring the preview matches in-game appearance:
+
 - **Minecraft Geometry**: Accurate replication of character model dimensions
 - **Texture Mapping**: Proper UV mapping for all model faces
 - **Lighting Model**: Realistic lighting that matches game environment
 - **Animation System**: Character poses and movement animations
 
-### File Format Compatibility
-Supporting multiple Minecraft skin formats:
-- **Legacy Format**: 64x32 pixel classic skins
-- **Modern Format**: 64x64 pixel skins with overlay support
-- **Auto-Detection**: Automatic format recognition and conversion
-- **Export Options**: Multiple format exports for different Minecraft versions
+### Collaboration and Sync
+- **WebSocket Patches**: The editor can broadcast pixel patch updates for shared editing sessions.
+- **Client Filtering**: Client IDs prevent echoing your own patches back into your view.
 
 ## User Interface Design
 
@@ -102,6 +99,7 @@ Supporting multiple Minecraft skin formats:
 
 ### Responsive Design
 The editor adapts to different screen sizes:
+
 - **Desktop**: Full multi-panel layout with all tools visible
 - **Tablet**: Collapsible panels with touch-optimized controls
 - **Mobile**: Stacked layout with swipe navigation between editor and preview

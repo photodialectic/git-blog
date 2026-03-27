@@ -162,7 +162,7 @@ Services are defined in a YAML configuration file:
 sites:
   - name: AI API
     path: /ai-api/health/liveness
-    description: AI API is a LiteLLM Proxy
+    description: AI API is the centralized AI gateway
   - name: Chat GPT
     path: /chat-gpt
     description: Chat UI for OpenAI
@@ -238,16 +238,10 @@ My HomeStack includes a dedicated documentation service that provides centralize
 
 #### Documentation Architecture
 
-The docs service is a NextJS application that serves OpenAPI specifications for each service:
+The docs service is a Next.js application that serves OpenAPI specifications for each service:
 
 ```bash
 docs/
-├── specs/           # OpenAPI YAML specifications
-│   ├── ai-api.yml
-│   ├── blog-api.yml
-│   ├── chat-gpt.yml
-│   ├── chores-api.yml
-│   └── ...
 ├── src/pages/
 │   ├── oas/         # Swagger UI routes
 │   ├── redoc/       # Redocly UI routes
@@ -257,14 +251,14 @@ docs/
 
 #### OpenAPI Specification Management
 
-Each service has its own OpenAPI spec file that defines its API contract:
+Each service has its own OpenAPI spec file (`docs/openapi.yml`) that is mounted into the docs container under `/spec`:
 
 ```yaml
-# docs/specs/ai-api.yml
+# ai-api/docs/openapi.yml
 openapi: 3.1.0
 info:
   title: AI API
-  description: LiteLLM Proxy
+  description: Unified AI gateway
   version: 1.61.3
 servers:
   - url: http://dev.nickhedberg.com/ai-api
@@ -296,13 +290,13 @@ export default function SwaggerPage() {
 
 #### Dynamic Spec Serving
 
-Specification files are served dynamically through an API endpoint:
+Specification files are served dynamically from the mounted `/spec` directory through an API endpoint:
 
 ```javascript
 // src/pages/api/specs/[...file].js
 export default function handler(req, res) {
   const { file } = req.query;
-  const filePath = `/app/specs/${file}`;
+  const filePath = `/spec/${file}`;
 
   if (!fs.existsSync(filePath)) {
     return res.status(404).json({ message: "Not Found" });

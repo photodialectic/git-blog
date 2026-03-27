@@ -24,10 +24,9 @@ After building the web-based [/chat-gpt](/chat-gpt) application, I wanted a term
 - **Multi-line Composition**: Dedicated compose mode for longer messages with `/compose`
 
 ### Configuration System
-- **JSON Configuration**: Simple JSON-based config stored in `~/.config/chat-tui/config.json`
-- **Token Management**: Secure token storage with Auth0 integration
-- **Environment Variables**: Optional environment-based configuration override
-- **Docker Support**: Containerized deployment with volume mounting for persistence
+- **JSON Configuration**: Config is stored in `~/.config/chat-tui/config.json` (or `/data/config.json` in Docker).
+- **Token Management**: Access token is copied from the Auth flow and persisted in config.
+- **Docker Support**: Containerized deployment with volume mounting for persistent state.
 
 ## Technical Implementation
 
@@ -68,6 +67,7 @@ ui/               # Bubble Tea interface components
 ## Development Experience
 
 Building this project provided insights into:
+
 - **Terminal UI Design**: Creating intuitive interfaces within terminal constraints
 - **Go Concurrency**: Managing streaming responses and UI updates concurrently
 - **State Management**: Balancing local persistence with real-time data
@@ -87,6 +87,7 @@ Building this project provided insights into:
 ## Docker Deployment
 
 The application is fully containerized with sensible defaults:
+
 - Color support enabled automatically
 - Volume mounting for persistent state
 - Host network access for API connectivity
@@ -95,6 +96,7 @@ The application is fully containerized with sensible defaults:
 ## Use Cases
 
 Chat-TUI excels in scenarios where:
+
 - **Server Administration**: Quick AI assistance while working on remote systems
 - **Development Workflow**: Integrated AI help without leaving the terminal
 - **Resource Efficiency**: Lightweight alternative to web interfaces

@@ -1,6 +1,6 @@
 # MySQL
 
-Database management in a containerized homestack requires careful consideration of resource usage, schema evolution, and operational simplicity. Rather than using a managed MySQL service, I run MySQL as another container with a focus on minimal memory usage and schema-as-code using Skeema.
+Database management in a containerized HomeStack requires careful consideration of resource usage, schema evolution, and operational simplicity. Rather than using a managed MySQL service, I run MySQL as another container with a focus on minimal memory usage and schema-as-code using Skeema.
 
 ## Why Self-Hosted MySQL?
 
