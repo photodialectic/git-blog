@@ -2,6 +2,8 @@
 
 A Go-based API service for managing isolated Docker container workspaces with integrated terminal access, persistent storage, and real-time communication via WebSocket.
 
+![Workspace-API Architecture](https://www.nickhedberg.com/images/eX784L_fqUx-L7UzzZEmbXy9XvI=/fit-in/1200x1200/nhdc.nyc3.cdn.digitaloceanspaces.com/img%2F1398%3A3006%2Fbde98e0e6b85955378cb72a98cb38a418b208679.png)
+
 ## Overview
 
 Workspace-API is the backend orchestrator for containerized development environments. It manages workspace lifecycle (creation, execution, teardown), handles file I/O operations, manages terminal sessions via WebSocket, and integrates with Redis for caching and Docker for container orchestration.

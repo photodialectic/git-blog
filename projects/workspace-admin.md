@@ -2,6 +2,8 @@
 
 A React + Vite web application that provides a user interface for managing isolated Docker workspaces, complete with integrated terminal access and workspace configuration.
 
+![Workspace-Admin Interface](https://www.nickhedberg.com/images/_WaYnSMkPq_ZnsShkIJsT3BG_jI=/fit-in/1200x1200/nhdc.nyc3.cdn.digitaloceanspaces.com/img%2F1462%3A3002%2Fe6c8fb82f635b193116eca29f2074c391bf8db69.png)
+
 ## Overview
 
 Workspace-Admin is the frontend for the Workspace-API, enabling users to create, manage, and interact with isolated development environments. Built with React 18, Vite, and xterm.js, it provides a modern interface for terminal access, workspace configuration, and real-time operations.
