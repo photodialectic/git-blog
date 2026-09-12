@@ -1,13 +1,14 @@
-# [AI-Agent-API: Conversational Orchestrator](/docs/oas/ai-agent-api.yml)
+# [AI Agent: Conversational Orchestrator](/docs/oas/ai-agent-api.yml)
 
-A Go service that sits in front of the HomeStack AI gateway, stores every agent/session/message in MySQL, and exposes an API for products that need structured AI conversations with tool calling.
+A two-part system that powers all of my AI experiences: a Go service that sits in front of the HomeStack AI gateway and stores every agent/session/message in MySQL, plus a Next.js operator console for managing agents and reviewing conversations.
 
 ## Overview
 
-`mono/ai-agent-api` is the control plane for all of my AI-powered experiences. It defines agent behavior (prompt, model, tool schema, fallback order), tracks long-running conversations, persists every message/tool call, and proxies completions through `ai-api` with centralized authentication and cost controls. Products such as Code Editor, AI Agent Admin, and Chat-GPT talk to this service instead of hitting providers directly.
+`mono/ai-agent-api` is the control plane for my AI-powered experiences. It defines agent behavior (prompt, model, tool schema, fallback order), tracks long-running conversations, persists every message/tool call, and proxies completions through `ai-api` with centralized authentication and cost controls. Products such as Code Editor, Chat-GPT, and AI-Agent-Admin talk to this service instead of hitting providers directly.
+
+`mono/ai-agent-admin` is the control room that sits on top of it: a secure UI for creating/editing agents, auditing tool calls, filtering conversations, and inspecting session state without touching the database.
 
 ![AI Agent API Diagram](https://www.nickhedberg.com/images/-xFzZ-cQRoG3M_rgMvc5hJNpjYQ=/fit-in/1200x1200/s3-us-west-2.amazonaws.com/nick-hedberg/img%2F2014%3A2302%2Fb72a93f50f472cd07dfa9f501ce9eb00f6f8de7b.png)
-
 
 ```mermaid
 graph LR
@@ -46,7 +47,7 @@ graph LR
     E --> C
 ```
 
-## Key Features
+## AI-Agent-API
 
 ### Agent Governance
 - **Structured Catalog**: Agents live in the `agent` table with key, display name, system prompt, default/fallback models, temperature, metadata, and JSON tool definitions.
@@ -63,7 +64,7 @@ graph LR
 - **Streaming Support**: If the request advertises `text/event-stream`, the service upgrades the connection, streams deltas back to the caller, and saves assistant/tool messages when the stream finishes.
 - **Idempotent Writes**: An LRU cache deduplicates `POST /sessions/{id}/messages` when clients send an `Idempotency-Key`, preventing double replies on network retries.
 
-## Technical Architecture
+### Technical Architecture
 
 ```
 mono/ai-agent-api/
@@ -89,3 +90,34 @@ Each handler executes three layers:
 1. **Auth**: `handlers.RequireBearer` enforces the master key and short-circuits unauthorized calls.
 2. **Store Interaction**: Reads/writes against MySQL via repositories (`agents.SQLRepository`, `sessions.Store`).
 3. **Upstream AI Calls**: Builds `openai.ChatCompletionNewParams`, forwards them to the configured AI gateway, and persists resulting assistant/tool messages.
+
+## AI-Agent-Admin
+
+A Next.js 15 application that authenticates through Auth0, enforces role-based access, and proxies every request through the same host so the UI never exposes raw API keys.
+
+![AI Agent Admin Screenshot](https://www.nickhedberg.com/images/Ozk0QMkYIKIzL-0MQmrVlv0oZms=/fit-in/1024x0/nhdc.nyc3.cdn.digitaloceanspaces.com/img%2F1528%3A2984%2F7c41ffbd6ef0b6a9ff861676d6618a2244659932.png)
+
+### Agent Management
+- **List View**: `/agents` fetches `GET /ai-agent-api/agents`, displays status badges, fallback warnings, and updated timestamps with `ClientDate`.
+- **Detail & Edit**: Dynamic routes (`/agents/[key]`) surface prompt text, tool definitions, unsupported model warnings, and offer edit/delete actions.
+- **Proxy Mutations**: All CRUD actions flow through `/ai-agent-admin/api/ai-agent/...`, which injects the master key and streams the upstream response straight back to the browser.
+
+### Conversations & Sessions
+- **Conversation Search**: Server-side data fetching pulls paginated conversations with filters so support can jump directly to a customer thread.
+- **Session Explorer**: `/sessions` exposes status (`open/closed`), token usage, and overrides pulled from the session store, making it easy to debug a stuck pipeline.
+- **Transcript Viewer**: Message timelines render user/assistant/tool entries with structured tool-call payloads for quick triage.
+
+### Technical Architecture
+
+```
+mono/ai-agent-admin/
+├── pages/
+│   ├── api/ai-agent/[...path].js  # Proxy to ai-agent-api
+│   ├── agents/                    # List/detail/edit pages
+│   ├── conversations/             # Filters + detail views
+│   ├── sessions/                  # Session explorer
+│   └── dashboard.js               # KPI cards + recent activity
+├── components/Layout.js           # Sidebar + shell
+├── lib/                           # Auth helpers, API client, env loader
+└── styles/                        # CSS modules for shared look/feel
+```
