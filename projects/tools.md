@@ -1,12 +1,12 @@
-# [IO Pipes: Data Transformation Workbench](/tools/pipeline)
+# [Tools: Data Transformation Workbench](/tools/pipeline)
 
 A browser-based pipeline builder that lets me chain together regex filters, JSON queries, fetchers, and templating blocks, then save those pipelines for later reuse.
 
 ## Overview
 
-`mono/tools/src/pages/pipeline/[[...id]].js` renders the IO Pipes experience: a responsive page with an input card and a tabbed workspace ("Add Transformer" / "Current Pipeline"), plus Auth0-aware user controls. Execution runs client-side, while pipeline definitions can be persisted through API routes backed by MySQL.
+`mono/tools/src/pages/pipeline/[[...id]].js` renders the Tools experience: a responsive page with an input card and a tabbed workspace ("Add Transformer" / "Current Pipeline"), plus Auth0-aware user controls. Execution runs client-side, while pipeline definitions can be persisted through API routes backed by MySQL.
 
-![IO Pipes Screenshot](https://www.nickhedberg.com/images/LQn0TvHmZcXVIwWBEa_EUr17U1U=/fit-in/1200x1200/nhdc.nyc3.cdn.digitaloceanspaces.com/img%2F2598%3A3024%2Fbd765f829f61c70dfb4cc66577d01cd6cf1cddac.png)
+![Tools Screenshot](https://www.nickhedberg.com/images/LQn0TvHmZcXVIwWBEa_EUr17U1U=/fit-in/1200x1200/nhdc.nyc3.cdn.digitaloceanspaces.com/img%2F2598%3A3024%2Fbd765f829f61c70dfb4cc66577d01cd6cf1cddac.png)
 
 ## Key Features
 
@@ -46,4 +46,4 @@ mono/tools/
 - **MySQL Query Layer**: `src/database/query.js` handles UUID conversions, JSON serialization, and enforces per-user access when updating or deleting a pipeline.
 - **Theme + User Experience**: `ThemeToggle` switches CSS variables, and `User` shows avatar/login/logout links plus quick actions (Save, Fork, Delete, Load Last).
 
-IO Pipes has become my go-to scratchpad for massaging logs, APIs, cron strings, and templated payloads without jumping into a local script each time.
+Tools has become my go-to scratchpad for massaging logs, APIs, cron strings, and templated payloads without jumping into a local script each time.
