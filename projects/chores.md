@@ -1,3 +1,9 @@
+---
+title: "Chores: Family Task Management System"
+date: 2026-03-26
+description: A NextJS app that gamifies household chores and family responsibilities.
+tags: [nextjs, family]
+---
 
 # [Chores: Family Task Management System](/chores)
 

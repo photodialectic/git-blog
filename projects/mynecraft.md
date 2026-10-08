@@ -1,3 +1,10 @@
+---
+title: "Mynecraft: Family Minecraft Platform"
+date: 2026-09-12
+description: A control plane and skin editor for my family's Minecraft experience.
+tags: [minecraft, family]
+---
+
 # [Mynecraft: Family Minecraft Platform](/mc-admin)
 
 A collection of services that power my family's Minecraft experience: a control plane for spinning Bedrock worlds up on demand, and a browser-based skin editor for customizing characters.

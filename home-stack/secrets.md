@@ -1,3 +1,11 @@
+---
+title: Secrets
+date: 2025-07-20
+weight: 2
+description: Storing sensitive configuration in a Git-tracked monorepo using age encryption.
+tags: [home-stack, security, encryption]
+---
+
 # Secrets
 
 Managing secrets in a Git-tracked monorepo presents a classic challenge: how do you store sensitive configuration without exposing it in version control? My solution uses [age](https://github.com/FiloSottile/age) for encryption, allowing me to commit encrypted secrets directly to the repository.

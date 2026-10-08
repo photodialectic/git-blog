@@ -1,3 +1,11 @@
+---
+title: "Claudex: Secure Containerized AI Development"
+date: 2025-09-21
+weight: 2
+description: A Docker-based environment for running AI agents with strict network isolation and Git-based workspace tracking.
+tags: [ai, docker, security]
+---
+
 # Claudex: Secure Containerized AI Development
 
 Originally I built [Claudex](https://github.com/photodialectic/claudex) because I had security concerns about AI Agent CLIs like [Claude Code](https://claude.ai/code) and [Codex](https://codex.dev). These tools are incredibly powerful, but they also have the ability to read and write files, execute commands, and make network requests.

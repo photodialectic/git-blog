@@ -1,3 +1,11 @@
+---
+title: Development and Utilities
+date: 2026-03-26
+weight: 5
+description: Tooling that streamlines my workflow - a custom CLI and GitHub Actions for continuous deployment.
+tags: [home-stack, tooling, ci]
+---
+
 # Development and Utilities
 
 A productive HomeStack requires tooling that streamlines common operations and automates repetitive tasks. My development workflow centers around a custom CLI tool and GitHub Actions for continuous deployment, making it easy to manage the complexity of a multi-service monorepo.

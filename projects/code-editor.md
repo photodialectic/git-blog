@@ -1,3 +1,10 @@
+---
+title: "Code-Editor: Browser-Based Development Environment"
+date: 2026-03-26
+description: A Next.js app for editing HTML, CSS, and JavaScript in the browser.
+tags: [nextjs, editor]
+---
+
 # [Code-Editor: Browser-Based Development Environment](/code-editor)
 
 A Next.js/React app for editing HTML, CSS, and JavaScript in the browser, with live preview and an AI-assisted editing loop.

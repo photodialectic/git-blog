@@ -1,3 +1,11 @@
+---
+title: AI Integration in HomeStack Services
+date: 2025-07-20
+weight: 3
+description: Practical examples of how AI capabilities are embedded across my HomeStack services.
+tags: [ai, integration]
+---
+
 # AI Integration in HomeStack Services
 
 With the AI-API providing unified access to multiple AI providers, integrating AI capabilities into HomeStack services becomes straightforward. Rather than managing different SDK versions and API keys, each service can simply point to the centralized AI endpoint.

@@ -1,3 +1,10 @@
+---
+title: "Tools: Data Transformation Workbench"
+date: 2026-09-12
+description: A browser-based pipeline builder for chaining data transformations.
+tags: [tooling, pipeline]
+---
+
 # [Tools: Data Transformation Workbench](/tools/pipeline)
 
 A browser-based pipeline builder that lets me chain together regex filters, JSON queries, fetchers, and templating blocks, then save those pipelines for later reuse.

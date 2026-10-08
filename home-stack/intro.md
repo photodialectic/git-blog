@@ -1,3 +1,11 @@
+---
+title: HomeStack
+date: 2026-03-26
+weight: 0
+description: An introduction to my service-oriented architecture for side projects.
+tags: [home-stack]
+---
+
 # HomeStack
 
 I thoroughly enjoy creating software. I would classify myself as a full-stack developer, with a preference for back-end development, but I also enjoy tackling front-end challenges.
@@ -12,22 +20,22 @@ In this series, I will write about how I have implemented various infrastructure
 
 ## Posts
 
-[1. Site-Router](/blog/home-stack/1-site-router.md)
+[1. Site-Router](/blog/home-stack/site-router.md)
 
 The brains of the operation. Originally, I used [https://hub.docker.com/r/jwilder/nginx-proxy](https://hub.docker.com/r/jwilder/nginx-proxy), but I have since moved on to fully embracing [Traefik](https://traefik.io/).
 
-[2. Secrets](/blog/home-stack/2-secrets.md)
+[2. Secrets](/blog/home-stack/secrets.md)
 
 I leverage [age](https://github.com/FiloSottile/age) for committing encrypted secrets to my git repos.
 
-[3. Authentication](/blog/home-stack/3-authentication.md)
+[3. Authentication](/blog/home-stack/authentication.md)
 
 I use the free version of [Auth0](https://auth0.com/) for authentication, along with the [NextJS SDK](https://github.com/auth0/nextjs-auth0).
 
-[4. MySQL](/blog/home-stack/4-mysql.md)
+[4. MySQL](/blog/home-stack/mysql.md)
 
 I don't use a managed MySQL service; instead, it is another container running on my server. A key unlock for me was managing schema changes with [Skeema](https://www.skeema.io/).
 
-[5. Development and Utilities](/blog/home-stack/5-development-and-utilities.md)
+[5. Development and Utilities](/blog/home-stack/development-and-utilities.md)
 
 I'm a [vim/screen](https://github.com/photodialectic/tilde) user, mainly because I like playing in the terminal still. I do have [CoPilot](https://github.com/github/copilot.vim) installed, and also a modified [vim-ai](https://github.com/photodialectic/vim-ai) plugin for AI Chat.
