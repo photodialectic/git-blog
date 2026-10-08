@@ -1,3 +1,11 @@
+---
+title: Formatting
+date: 2025-07-21
+weight: 2
+description: Portable code formatting scripts for a terminal-based workflow.
+tags: [tooling, formatting]
+---
+
 # Formatting
 
 I use these two scripts to format code. I don't use an IDE so a portable solution is nice.

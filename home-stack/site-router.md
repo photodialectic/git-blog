@@ -1,3 +1,11 @@
+---
+title: Site Router
+date: 2025-07-20
+weight: 1
+description: The heart of my HomeStack - single-domain, path-based routing with Traefik.
+tags: [home-stack, traefik, routing]
+---
+
 # Site Router
 
 The site router is the heart of my HomeStack infrastructure - it's what makes the single-domain, path-based routing architecture possible. After starting with nginx-proxy, I migrated to Traefik and haven't looked back.

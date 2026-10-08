@@ -1,3 +1,10 @@
+---
+title: "Docs: Interactive API Documentation Platform"
+date: 2026-03-31
+description: Interactive API documentation for all HomeStack microservices.
+tags: [docs, api]
+---
+
 # [Docs: Interactive API Documentation Platform](/docs)
 
 A NextJS service that provides comprehensive, interactive API documentation for all HomeStack microservices using OpenAPI specifications and modern documentation tooling.

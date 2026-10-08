@@ -1,3 +1,11 @@
+---
+title: Authentication
+date: 2025-07-20
+weight: 3
+description: Secure, modern authentication across all my services using Auth0.
+tags: [home-stack, auth0, security]
+---
+
 # Authentication
 
 Authentication is a critical piece of any multi-service architecture. Rather than rolling my own solution, I use Auth0's free tier combined with the NextJS SDK to provide secure, modern authentication across all my HomeStack services.

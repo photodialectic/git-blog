@@ -1,3 +1,11 @@
+---
+title: AI in HomeStack
+date: 2026-03-26
+weight: 0
+description: An overview of my unified AI layer and how it serves all my projects.
+tags: [ai]
+---
+
 # AI in HomeStack
 
 Artificial intelligence has become an integral part of my HomeStack infrastructure. Rather than relying on individual AI service subscriptions or managing multiple API keys across different applications, I've built a unified AI layer that serves all my projects.
@@ -19,14 +27,14 @@ This architecture provides several key benefits:
 
 ## Posts
 
-[1. AI-API: Self-Hosted Bifrost Gateway](/blog/ai/1-ai-api.md)
+[1. AI-API: Self-Hosted Bifrost Gateway](/blog/ai/ai-api.md)
 
 How I unified multiple AI providers (OpenAI, Anthropic, Google) behind a single API endpoint using Bifrost, with centralized authentication and cost tracking.
 
-[2. Claudex: Secure Containerized AI Development](/blog/ai/2-claudex.md)
+[2. Claudex: Secure Containerized AI Development](/blog/ai/claudex.md)
 
 A Docker-based environment for running AI agents like Claude Code and Codex with strict network isolation and Git-based workspace tracking.
 
-[3. AI Integration in HomeStack Services](/blog/ai/3-integration.md)
+[3. AI Integration in HomeStack Services](/blog/ai/integration.md)
 
 Practical examples of how AI capabilities are embedded across my HomeStack services, from code generation to content creation.

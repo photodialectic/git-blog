@@ -1,3 +1,10 @@
+---
+title: "AI Agent: Conversational Orchestrator"
+date: 2026-09-12
+description: A Go service and Next.js console that power all of my AI experiences.
+tags: [ai, go, nextjs]
+---
+
 # [AI Agent: Conversational Orchestrator](/docs/oas/ai-agent-api.yml)
 
 A two-part system that powers all of my AI experiences: a Go service that sits in front of the HomeStack AI gateway and stores every agent/session/message in MySQL, plus a Next.js operator console for managing agents and reviewing conversations.

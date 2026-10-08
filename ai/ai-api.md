@@ -1,3 +1,11 @@
+---
+title: "AI-API: Self-Hosted Bifrost Gateway"
+date: 2026-03-26
+weight: 1
+description: How I unified multiple AI providers behind a single API endpoint using Bifrost.
+tags: [ai, api, bifrost]
+---
+
 # AI-API: Self-Hosted Bifrost Gateway
 
 Managing multiple AI provider APIs (OpenAI, Anthropic, Google) across different services becomes unwieldy quickly. I prefer a unified gateway approach. I started with the LiteLLM reverse proxy and later switched to Bifrost for two main reasons:

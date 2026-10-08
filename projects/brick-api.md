@@ -1,3 +1,9 @@
+---
+title: "Brick-API: LEGO Inventory Management Service"
+date: 2025-12-22
+description: A Python/Tornado API for LEGO set inventory management.
+tags: [python, api, lego]
+---
 
 # Brick-API: LEGO Inventory Management Service
 

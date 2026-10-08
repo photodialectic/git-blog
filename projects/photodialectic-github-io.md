@@ -1,3 +1,10 @@
+---
+title: Photodialectic Github Pages
+date: 2026-07-12
+description: A GitHub Pages site for experiments and tech talks.
+tags: [github, pages]
+---
+
 # [Photodialectic Github Pages](https://photodialectic.github.io)
 
 This is a [GitHub Pages](https://docs.github.com/en/pages) site I use with AI harnesses to build out experiements or generic tech talks. [Repo](https://github.com/photodialectic/photodialectic.github.io)

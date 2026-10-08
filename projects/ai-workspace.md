@@ -1,3 +1,10 @@
+---
+title: "AI Workspace: Docker Workspace Platform"
+date: 2026-09-12
+description: Isolated, containerized development environments with terminal access.
+tags: [ai, docker, workspace]
+---
+
 # [AI Workspace: Docker Workspace Platform](/docs/oas/workspace-api.yml)
 
 A Go backend and a React frontend that together provide isolated, containerized development environments with integrated terminal access, persistent storage, and real-time communication.

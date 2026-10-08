@@ -1,3 +1,10 @@
+---
+title: AI Chat
+date: 2026-09-12
+description: A web app and terminal client backed by my self-hosted AI-API gateway.
+tags: [ai, chat]
+---
+
 # [AI Chat](/chat-gpt)
 
 Two interfaces onto the same conversational stack: a full-featured web application and a terminal-native client, both backed by my self-hosted AI-API gateway.

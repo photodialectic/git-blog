@@ -1,3 +1,11 @@
+---
+title: Building a Git-Backed Blog API in Go
+date: 2026-04-05
+weight: 1
+description: Treating a Git repo as the only source of truth for a blog backend.
+tags: [go, git, api]
+---
+
 # Building a Git-Backed Blog API in Go
 
 Git already gives me drafts (branches), history (commits), and content review (pull requests). I wanted an API that exposes that structure directly without inventing another datastore, so I rewrote the blog backend in Go and treated a Git repo as the only source of truth.

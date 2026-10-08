@@ -1,3 +1,10 @@
+---
+title: "AI-API: Self-Hosted Bifrost Gateway"
+date: 2026-03-26
+description: A unified AI gateway consolidating multiple providers behind one API.
+tags: [ai, api, bifrost]
+---
+
 # [AI-API: Self-Hosted Bifrost Gateway](/docs/oas/ai-api.yml)
 
 A unified AI gateway that consolidates multiple AI providers (OpenAI, Anthropic, Gemini, and Vertex) behind a single API endpoint with centralized authentication and governance.
